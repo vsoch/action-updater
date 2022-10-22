@@ -1,0 +1,15 @@
+# The action updater settings file allows for finer control
+# over settings. For most people, you shouldn't need to change these defaults
+
+# config editor
+config_editor: vim
+
+# GitHub api
+github_api: https://api.github.com
+
+updaters:
+  version:
+    # Repository orgs to allow a major version (and not commit)
+    major_orgs:
+      - actions
+      - docker

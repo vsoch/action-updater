@@ -1,0 +1,14 @@
+include README.md LICENSE
+recursive-include action_updater *.png
+recursive-include action_updater *.sh
+recursive-include action_updater *
+recursive-include * *.png
+prune env*
+global-exclude .env
+global-exclude *.py[co]
+recursive-exclude .git *
+global-exclude *.img
+global-exclude *.simg
+global-exclude *.sif
+global-exclude __pycache__
+prune docs*
