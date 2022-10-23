@@ -104,6 +104,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">quiet</span> <span class="o">=</span> <span class="n">quiet</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">Console</span><span class="p">()</span>
 
+        <span class="c1"># If using for a GitHub action, a global flag that indicates changes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">has_changes</span> <span class="o">=</span> <span class="kc">False</span>
+
         <span class="c1"># If we don&#39;t have default settings, load</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;settings&quot;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">(</span><span class="n">settings_file</span><span class="p">)</span>
@@ -168,6 +171,7 @@
                 <span class="c1"># The count reflects the last run</span>
                 <span class="k">if</span> <span class="n">updater</span><span class="o">.</span><span class="n">detect</span><span class="p">(</span><span class="n">action</span><span class="p">):</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[red]✖️ </span><span class="si">{</span><span class="n">updater</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2"> Updater: </span><span class="si">{</span><span class="n">updater</span><span class="o">.</span><span class="n">count</span><span class="si">}</span><span class="s2"> updates[/red]&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">has_changes</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[green]✔ </span><span class="si">{</span><span class="n">updater</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">: No updates[/green]&quot;</span><span class="p">)</span>
 

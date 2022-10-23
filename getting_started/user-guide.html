@@ -64,6 +64,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#set-output-env-and-save-state">Set Output / Env and Save State</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#container">Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#github-action">GitHub Action</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#variables">Variables</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="developer-guide.html">Developer Guide</a></li>
@@ -285,6 +291,98 @@ For version sorting and updates, we use <a class="reference external" href="http
 These updaters do not have any arguments. The <code class="docutils literal notranslate"><span class="pre">set-env</span></code> directive was done earlier, and largely it shouldn’t be in used anymore.
 These updaters do not have any custom settings, as the updates are fairly straight forward. One possible preference is to use printf instead of echo,
 but I didn’t implement this yet as I think it’s fairly trivial.</p>
+</section>
+</section>
+<section id="container">
+<h2>Container<a class="headerlink" href="#container" title="Permalink to this heading"></a></h2>
+<p>If you don’t want to install locally, we provide a <a class="reference external" href="https://github.com/vsoch/action-updater/pkgs/container/action-updater">docker container</a>
+that you can use! As an example</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker run -it ghcr.io/vsoch/action-updater
+<span class="gp"># </span>which action-updater
+</pre></div>
+</div>
+<p>And pulling via Singularity (so you don’t change permissions, or can use on an HPC cluster)</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>singularity pull docker://ghcr.io/vsoch/action-updater
+<span class="gp">$ </span>singularity <span class="nb">exec</span> action-updater_latest.sif action-updater detect .github/workflows/main.yml
+</pre></div>
+</div>
+<p>And that’s it!</p>
+</section>
+<section id="github-action">
+<h2>GitHub Action<a class="headerlink" href="#github-action" title="Permalink to this heading"></a></h2>
+<p>I decided that I wanted to be able to run a detection to alert me to needing changes
+at least once a year (maybe twice?) and then use the main branch here so I could always
+be “subscribed” to new updates. Since cron doesn’t have a “run once a year” setting, we need to hack
+this a bit! We can ask it to run once a month (on our day of choice) and then only proceed given
+that we hit a particular month (or set of months). Note that since a GitHub bot (action) is not
+allowed to write to any workflow file, we can’t open a pull request with changes - we can only
+run and alert you to run the command locally!</p>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h3>
+<p>Here is an example of running the GitHub Updater to run a detection once a year.
+This is supported by cron!</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GitHub Updater (Yearly)</span><span class="w"></span>
+<span class="nt">on</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">schedule</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># 1st of June, so it&#39;s summer and you aren&#39;t busy, right?</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">cron</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0</span><span class="nv"> </span><span class="s">0</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">6</span><span class="nv"> </span><span class="s">*&quot;</span><span class="w"></span>
+
+<span class="nt">jobs</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">run-detect</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run GitHub Updater</span><span class="w"></span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span><span class="w"></span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout Repository</span><span class="w"></span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v3</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Detect and Update</span><span class="w"></span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vsoch/github-updater@main</span><span class="w"></span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.GITHUB_TOKEN }}</span><span class="w"></span>
+<span class="w">          </span><span class="c1"># This is the default</span><span class="w"></span>
+<span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.github/workflows</span><span class="w"></span>
+</pre></div>
+</div>
+<p>And here is an idea for a hack to make it run more than once a year (but not once a month) -
+basically just get the month and check if we match!</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GitHub Updater (Bi-annual)</span><span class="w"></span>
+<span class="nt">on</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">schedule</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># 1st of every month (and action will check for specific months)</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">cron</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0</span><span class="nv"> </span><span class="s">0</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*&quot;</span><span class="w"></span>
+
+<span class="nt">jobs</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">test-detect</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run GitHub Updater</span><span class="w"></span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span><span class="w"></span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Determine if Running</span><span class="w"></span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">           </span><span class="no">month=$(date &#39;+%m&#39;)</span><span class="w"></span>
+<span class="w">           </span><span class="no"># Run in October or April</span><span class="w"></span>
+<span class="w">           </span><span class="no">if [[ &quot;${month}&quot; == &quot;10&quot; ]] || [[ &quot;${month}&quot; == &quot;4&quot; ]]; then</span><span class="w"></span>
+<span class="w">               </span><span class="no">printf &quot;We are in October or April, run.\n&quot;</span><span class="w"></span>
+<span class="w">               </span><span class="no">echo &quot;do_run=true&quot; &gt;&gt; $GITHUB_ENV</span><span class="w"></span>
+<span class="w">           </span><span class="no">else</span><span class="w"></span>
+<span class="w">               </span><span class="no">printf &quot;We are NOT in October or April, no run.\n&quot;</span><span class="w"></span>
+<span class="w">               </span><span class="no">echo &quot;do_run=false&quot; &gt;&gt; $GITHUB_ENV</span><span class="w"></span>
+<span class="w">           </span><span class="no">fi</span><span class="w"></span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout Repository</span><span class="w"></span>
+<span class="w">        </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(env.do_run == &#39;true&#39;)</span><span class="w"></span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v3</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Detect and Update</span><span class="w"></span>
+<span class="w">        </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(env.do_run == &#39;true&#39;)</span><span class="w"></span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vsoch/github-updater@main</span><span class="w"></span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.GITHUB_TOKEN }}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Both of these examples are provided in the <a class="reference external" href="https://github.com/vsoch/action-updater/tree/main/examples">examples</a> directory of the repository.</p>
+</section>
+<section id="variables">
+<h3>Variables<a class="headerlink" href="#variables" title="Permalink to this heading"></a></h3>
+<p>From the above, you can tell that by default we will run on your <code class="docutils literal notranslate"><span class="pre">.github/workflows</span></code> provided
+with the repository.</p>
 </section>
 </section>
 </section>
