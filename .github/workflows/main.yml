@@ -33,4 +33,4 @@ jobs:
         export PATH="/usr/share/miniconda/bin:$PATH"
         source activate black
         pip install -e .
-        pytest action_updater/test*.py
+        pytest action_updater/tests/test*.py
