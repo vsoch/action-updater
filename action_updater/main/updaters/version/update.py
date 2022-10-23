@@ -15,20 +15,6 @@ schema = {
 }
 
 
-def update_comment(comment_list, comment):
-    """
-    Update an old comment to a new one
-    """
-    updated = False
-    items = []
-    for item in comment_list:
-        if item and hasattr(item, "value") and not updated:
-            item.value = f"# {comment}\n"
-            updated = True
-        items.append(item)
-    return items
-
-
 class VersionUpdater(UpdaterBase):
 
     name = "version"
@@ -45,13 +31,13 @@ class VersionUpdater(UpdaterBase):
 
         # No point if we don't have jobs!
         if not action.jobs:
-            return
+            return False
 
         # We will use major versions for these orgs (trusted)
         trusted_orgs = self.settings.get("major_orgs")
 
         # For each job, look for steps->updater versions
-        for job_name, job in action.jobs.items():
+        for _, job in action.jobs.items():
             for step in job.get("steps", []):
 
                 # We are primarily interested in uses
@@ -66,7 +52,7 @@ class VersionUpdater(UpdaterBase):
 
                 # Get the current tag or version (we will want to maintain this convention)
                 # Create a lookup based on the ref
-                repo, tag = repo.split("@")
+                repo, _ = repo.split("@")
                 org, _ = repo.split("/", 1)
 
                 # Retrieve all tags for the repository, a lookup by tag name
@@ -82,15 +68,22 @@ class VersionUpdater(UpdaterBase):
                 if not updated:
                     continue
                 updated = f"{repo}@{updated}"
+                previous = step["uses"]
 
-                if updated != step["uses"]:
-                    # If we added a new comment, update the old one
-                    if "#" in updated and "uses" in step.ca.items:
-                        updated, comment = updated.split("#", 1)
-                        step.ca.items["uses"] = update_comment(step.ca.items["uses"], comment)
+                # If we added a new comment, update the old one
+                if "#" in updated:
+                    updated, comment = updated.split("#", 1)
+                    comment = comment.strip()
                     step["uses"] = updated.strip()
+                    step.ca.items["uses"] = [None, None, None, None]
+                    step.yaml_add_eol_comment(f"# {comment}\n", "uses", column=0)
+                    step["uses"] = updated.strip()
+
+                # Do we have a change?
+                if step["uses"] != previous:
                     self.count += 1
-        return True
+
+        return self.count != 0
 
     def get_major_tag(self, tags):
         """

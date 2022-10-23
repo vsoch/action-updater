@@ -34,6 +34,7 @@ class GitHubAction:
         """
         utils.write_yaml(self.changes, path)
 
+    @property
     def has_changes(self):
         """
         Determine if before != after (the action has changed)
