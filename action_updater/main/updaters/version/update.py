@@ -75,9 +75,15 @@ class VersionUpdater(UpdaterBase):
                     updated, comment = updated.split("#", 1)
                     comment = comment.strip()
                     step["uses"] = updated.strip()
+
+                    # TODO some check to preserve other previous comments?
                     step.ca.items["uses"] = [None, None, None, None]
+
+                    # Add the end of line comment (third position in list)
                     step.yaml_add_eol_comment(f"# {comment}\n", "uses", column=0)
-                    step["uses"] = updated.strip()
+
+                # Always do the update (regardless of comment!)
+                step["uses"] = updated.strip()
 
                 # Do we have a change?
                 if step["uses"] != previous:

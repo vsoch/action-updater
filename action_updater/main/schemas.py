@@ -2,6 +2,8 @@ __author__ = "Vanessa Sochat"
 __copyright__ = "Copyright 2022, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
+from pygments.styles import get_all_styles
+
 # Derived from https://github.com/softprops/github-actions-schemas/blob/master/workflow.json
 
 schema_url = "http://json-schema.org/draft-07/schema"
@@ -158,6 +160,7 @@ settingsProperties = {
     "github_api": {"type": "string"},
     "config_editor": {"type": "string"},
     "updaters": updaters_schema,
+    "code_theme": {"type": "string", "choices": list(get_all_styles())},
 }
 
 settings = {
@@ -167,6 +170,7 @@ settings = {
     "required": [
         "github_api",
         "config_editor",
+        "code_theme",
         "updaters",
     ],
     "properties": settingsProperties,

@@ -93,7 +93,7 @@ class ActionUpdater:
 
             # If we want to show details:
             if details:
-                action.diff()
+                action.diff(self.settings.code_theme or "vim")
             actions[path] = action
         return actions
 

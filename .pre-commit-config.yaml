@@ -4,11 +4,13 @@ repos:
     rev: v4.3.0
     hooks:
       - id: check-added-large-files
+        args: ['--maxkb=2000']
       - id: check-case-conflict
       - id: check-docstring-first
       - id: end-of-file-fixer
       - id: trailing-whitespace
       - id: mixed-line-ending
+      - id: check-yaml
 
   - repo: local
     hooks:

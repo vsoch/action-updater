@@ -30,7 +30,7 @@ def update_lines(lines, key="set-output", envar="$GITHUB_OUTPUT"):
 
         match = match.groupdict()
         value = match["value"].strip('"').strip("'")
-        line = 'echo "%s=%s" >> %s' % (match["name"], value, envar)
+        line = 'echo "%s=%s" >> %s\n' % (match["name"], value, envar)
         updated.append(line)
 
     return "".join(updated)
@@ -47,11 +47,10 @@ class SetoutputUpdater(UpdaterBase):
         """
         # Set the count to 0
         self.count = 0
-        updated = False
 
         # No point if we don't have jobs!
         if not action.jobs:
-            return
+            return False
 
         # For each job, look for steps->updater versions
         for _, job in action.jobs.items():
@@ -63,7 +62,11 @@ class SetoutputUpdater(UpdaterBase):
 
                 # Update step run lines (returns parsed again together)
                 updated_lines = update_lines(step["run"])
-                updated = updated or (updated_lines != step["run"])
+
+                # Keep track of change counts
+                if updated_lines != step["run"]:
+                    self.count += 1
+
                 step["run"] = updated_lines
 
-        return updated
+        return self.count != 0

@@ -1,0 +1,41 @@
+name: Update Docs
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: gh-pages
+
+    - name: Create conda environment
+      run: conda create --quiet -c conda-forge --name updater sphinx
+
+    - name: Install Actions Updater
+      run: |
+        export PATH="/usr/share/miniconda/bin:$PATH"
+        root=$PWD
+        source activate updater
+        cd /tmp
+        git clone https://github.com/vsoch/action-updater
+        cd action-updater
+        pip install -e .
+        cd docs
+        pip install -r requirements.txt
+        make html
+        mv $root/.git _build/html/.git
+        rm -rf $root
+        mv _build/html $root
+        cd $root
+        touch .nojekyll
+        ls
+
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@ba1486788b0490a235422264426c45848eac35c6 # v4.4.1
+      with:
+        branch: gh-pages
+        folder: .
