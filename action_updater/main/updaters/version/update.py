@@ -2,11 +2,8 @@ __author__ = "Vanessa Sochat"
 __copyright__ = "Copyright 2022, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
+from action_updater.main.github import sort_major, sort_tags
 from action_updater.main.updater import UpdaterBase
-from action_updater.logger import logger
-from action_updater.main.github import sort_tags, sort_major
-import re
-
 
 schema = {
     "type": "object",
@@ -90,9 +87,7 @@ class VersionUpdater(UpdaterBase):
                     # If we added a new comment, update the old one
                     if "#" in updated and "uses" in step.ca.items:
                         updated, comment = updated.split("#", 1)
-                        step.ca.items["uses"] = update_comment(
-                            step.ca.items["uses"], comment
-                        )
+                        step.ca.items["uses"] = update_comment(step.ca.items["uses"], comment)
                     step["uses"] = updated.strip()
                     self.count += 1
         return True

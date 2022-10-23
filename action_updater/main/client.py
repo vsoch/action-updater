@@ -3,11 +3,14 @@ __copyright__ = "Copyright 2022, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 import os
-from .action import GitHubAction
-from .updater import UpdaterFinder
+
 from rich.console import Console
+
 import action_updater.utils as utils
+
+from .action import GitHubAction
 from .settings import Settings
+from .updater import UpdaterFinder
 
 
 class ActionUpdater:
@@ -38,9 +41,7 @@ class ActionUpdater:
             for name, updaterClass in self.finder.items():
 
                 # Instantiate an updater for the path, provide settings
-                self._updaters[name] = updaterClass(
-                    token=self.token, settings=self.settings
-                )
+                self._updaters[name] = updaterClass(token=self.token, settings=self.settings)
 
         return self._updaters
 
@@ -64,7 +65,7 @@ class ActionUpdater:
                 final.add(filename)
         return list(final)
 
-    def detect(self, paths, details=True):
+    def detect(self, paths, details=True, updaters=None):
         """
         Look for changes in files according to updaters
         """
@@ -80,11 +81,13 @@ class ActionUpdater:
             # Todo convert this into an iter function (shared between detect and update)
             for _, updater in self.updaters.items():
 
+                # Skip updaters per request of the user
+                if updaters and updater.slug not in updaters:
+                    continue
+
                 # The count reflects the last run
                 if updater.detect(action):
-                    self.c.print(
-                        f"[red]❌ {updater.title} Updater: {updater.count} updates[/red]"
-                    )
+                    self.c.print(f"[red]❌ {updater.title} Updater: {updater.count} updates[/red]")
                 else:
                     self.c.print(f"[green]✔ {updater.title}: No updates[/green]")
 
@@ -94,11 +97,11 @@ class ActionUpdater:
             actions[path] = action
         return actions
 
-    def update(self, paths, details=True):
+    def update(self, paths, details=True, updaters=None):
         """
         Update files.
         """
-        actions = self.detect(paths, details=details)
+        actions = self.detect(paths, details=details, updaters=updaters)
         for path, action in actions.items():
             if action.has_changes:
                 self.c.print("[purple]❇ Writing updated {path}[/purple]")

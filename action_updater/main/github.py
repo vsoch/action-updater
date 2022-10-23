@@ -3,12 +3,10 @@ __copyright__ = "Copyright 2022, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 
-import pipelib.steps as step
-import pipelib.pipeline as pipeline
-
-# Pre-generated sets of steps we can use
-import pipelib.pipelines as pipelines
 import string
+
+import pipelib.pipeline as pipeline
+import pipelib.steps as step
 
 
 def sort_tags(tags):
@@ -16,9 +14,7 @@ def sort_tags(tags):
     Sort a list of string tags, return sorted (first latest) with original version
     """
     # all letters excluded except for v
-    letters = "(%s)" % "|".join(
-        [x for x in string.ascii_letters if x not in ["v", "V"]]
-    )
+    letters = "(%s)" % "|".join([x for x in string.ascii_letters if x not in ["v", "V"]])
 
     # A pipeline to process docker tags
     steps = (
