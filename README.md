@@ -102,6 +102,10 @@ An update command performs a detect, but then writes changes to the file.
 $ action-updater update .github/workfows/main.yaml
 ```
 
+And you can run for all files in your `.github/workflows` directory!
+
+![docs/assets/img/updates.png](docs/assets/img/updates.png)
+
 For either of the `update` or `detect` commands, turn off details by
 adding the `--no-details` flag. Also for both, exporting a `GITHUB_TOKEN`
 will increase API limits for any checks of tags/releases.
