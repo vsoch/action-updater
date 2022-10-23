@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>action_updater.main package &mdash; Action Updater 0.0.11 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="action_updater.main.updaters package" href="action_updater.main.updaters.html" />
+    <link rel="prev" title="action_updater.client package" href="action_updater.client.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Action Updater
+          </a>
+              <div class="version">
+                0.0.11
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/user-guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/developer-guide.html">Developer Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">action_updater</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="action_updater.html">action_updater package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="action_updater.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="action_updater.client.html">action_updater.client package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">action_updater.main package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.utils.html">action_updater.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.html#module-action_updater.defaults">action_updater.defaults module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.html#module-action_updater.logger">action_updater.logger module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.html#module-action_updater.version">action_updater.version module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.html#module-action_updater">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Action Updater</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">action_updater</a> &raquo;</li>
+          <li><a href="action_updater.html">action_updater package</a> &raquo;</li>
+      <li>action_updater.main package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/action_updater.main.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="action-updater-main-package">
+<h1>action_updater.main package<a class="headerlink" href="#action-updater-main-package" title="Permalink to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="action_updater.main.updaters.html">action_updater.main.updaters package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.main.updaters.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.main.updaters.savestate.html">action_updater.main.updaters.savestate package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.updaters.savestate.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.updaters.savestate.html#module-action_updater.main.updaters.savestate.update">action_updater.main.updaters.savestate.update module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.updaters.savestate.html#module-action_updater.main.updaters.savestate">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.main.updaters.setenv.html">action_updater.main.updaters.setenv package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.updaters.setenv.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.updaters.setenv.html#module-action_updater.main.updaters.setenv.update">action_updater.main.updaters.setenv.update module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.updaters.setenv.html#module-action_updater.main.updaters.setenv">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.main.updaters.setoutput.html">action_updater.main.updaters.setoutput package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.updaters.setoutput.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.updaters.setoutput.html#module-action_updater.main.updaters.setoutput.update">action_updater.main.updaters.setoutput.update module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.updaters.setoutput.html#module-action_updater.main.updaters.setoutput">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.main.updaters.version.html">action_updater.main.updaters.version package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.updaters.version.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.updaters.version.html#module-action_updater.main.updaters.version.update">action_updater.main.updaters.version.update module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.updaters.version.html#module-action_updater.main.updaters.version">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.main.updaters.html#module-action_updater.main.updaters">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-action_updater.main.action">
+<span id="action-updater-main-action-module"></span><h2>action_updater.main.action module<a class="headerlink" href="#module-action_updater.main.action" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="action_updater.main.action.GitHubAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">action_updater.main.action.</span></span><span class="sig-name descname"><span class="pre">GitHubAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/action.html#GitHubAction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.action.GitHubAction" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Parse a GitHub action into it’s sections.</p>
+<p>We always present the changes (copy of original) and then can
+easily compare the two. The overall structure should not change.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.action.GitHubAction.diff">
+<span class="sig-name descname"><span class="pre">diff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code_theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vim'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/action.html#GitHubAction.diff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.action.GitHubAction.diff" title="Permalink to this definition"></a></dt>
+<dd><p>Show diff between original (cfg) and changed!</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="action_updater.main.action.GitHubAction.has_changes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">has_changes</span></span><a class="headerlink" href="#action_updater.main.action.GitHubAction.has_changes" title="Permalink to this definition"></a></dt>
+<dd><p>Determine if before != after (the action has changed)</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="action_updater.main.action.GitHubAction.jobs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">jobs</span></span><a class="headerlink" href="#action_updater.main.action.GitHubAction.jobs" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.action.GitHubAction.render_after">
+<span class="sig-name descname"><span class="pre">render_after</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/action.html#GitHubAction.render_after"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.action.GitHubAction.render_after" title="Permalink to this definition"></a></dt>
+<dd><p>Render the action post-detect (with changes).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.action.GitHubAction.render_before">
+<span class="sig-name descname"><span class="pre">render_before</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/action.html#GitHubAction.render_before"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.action.GitHubAction.render_before" title="Permalink to this definition"></a></dt>
+<dd><p>Render the action pre-detect (without changes).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.action.GitHubAction.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/action.html#GitHubAction.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.action.GitHubAction.write" title="Permalink to this definition"></a></dt>
+<dd><p>Save the action to file.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-action_updater.main.client">
+<span id="action-updater-main-client-module"></span><h2>action_updater.main.client module<a class="headerlink" href="#module-action_updater.main.client" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="action_updater.main.client.ActionUpdater">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">action_updater.main.client.</span></span><span class="sig-name descname"><span class="pre">ActionUpdater</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quiet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/client.html#ActionUpdater"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.client.ActionUpdater" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Create a GitHub updater</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.client.ActionUpdater.detect">
+<span class="sig-name descname"><span class="pre">detect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">details</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">updaters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/client.html#ActionUpdater.detect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.client.ActionUpdater.detect" title="Permalink to this definition"></a></dt>
+<dd><p>Look for changes in files according to updaters</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.client.ActionUpdater.iter_paths">
+<span class="sig-name descname"><span class="pre">iter_paths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/client.html#ActionUpdater.iter_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.client.ActionUpdater.iter_paths" title="Permalink to this definition"></a></dt>
+<dd><p>Helper function to flexibly handle parsing paths.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.client.ActionUpdater.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">details</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">updaters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/client.html#ActionUpdater.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.client.ActionUpdater.update" title="Permalink to this definition"></a></dt>
+<dd><p>Update files.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="action_updater.main.client.ActionUpdater.updaters">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">updaters</span></span><a class="headerlink" href="#action_updater.main.client.ActionUpdater.updaters" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of updaters available</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-action_updater.main.github">
+<span id="action-updater-main-github-module"></span><h2>action_updater.main.github module<a class="headerlink" href="#module-action_updater.main.github" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.main.github.sort_major">
+<span class="sig-prename descclassname"><span class="pre">action_updater.main.github.</span></span><span class="sig-name descname"><span class="pre">sort_major</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tags</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/github.html#sort_major"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.github.sort_major" title="Permalink to this definition"></a></dt>
+<dd><p>Allow major tags like v3</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.main.github.sort_tags">
+<span class="sig-prename descclassname"><span class="pre">action_updater.main.github.</span></span><span class="sig-name descname"><span class="pre">sort_tags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tags</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/github.html#sort_tags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.github.sort_tags" title="Permalink to this definition"></a></dt>
+<dd><p>Sort a list of string tags, return sorted (first latest) with original version</p>
+</dd></dl>
+
+</section>
+<section id="module-action_updater.main.schemas">
+<span id="action-updater-main-schemas-module"></span><h2>action_updater.main.schemas module<a class="headerlink" href="#module-action_updater.main.schemas" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-action_updater.main.settings">
+<span id="action-updater-main-settings-module"></span><h2>action_updater.main.settings module<a class="headerlink" href="#module-action_updater.main.settings" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.main.settings.OrderedList">
+<span class="sig-prename descclassname"><span class="pre">action_updater.main.settings.</span></span><span class="sig-name descname"><span class="pre">OrderedList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">listing</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/settings.html#OrderedList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.OrderedList" title="Permalink to this definition"></a></dt>
+<dd><p>Preserve ordering when saved to yaml</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="action_updater.main.settings.Settings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">action_updater.main.settings.</span></span><span class="sig-name descname"><span class="pre">Settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/settings.html#Settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.Settings" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#action_updater.main.settings.SettingsBase" title="action_updater.main.settings.SettingsBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">SettingsBase</span></code></a></p>
+<p>The settings class is a wrapper for easily parsing a settings.yml file.</p>
+<p>We parse into a query-able class. It also gives us control to update settings,
+meaning we change the values and then write them to file. It’s basically
+a dictionary-like class with extra functions.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="action_updater.main.settings.SettingsBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">action_updater.main.settings.</span></span><span class="sig-name descname"><span class="pre">SettingsBase</span></span><a class="reference internal" href="../_modules/action_updater/main/settings.html#SettingsBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.SettingsBase" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.settings.SettingsBase.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/settings.html#SettingsBase.add"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.SettingsBase.add" title="Permalink to this definition"></a></dt>
+<dd><p>Add a value to a list parameter</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.settings.SettingsBase.change_validate">
+<span class="sig-name descname"><span class="pre">change_validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/settings.html#SettingsBase.change_validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.SettingsBase.change_validate" title="Permalink to this definition"></a></dt>
+<dd><p>A courtesy function to validate a new config addition.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.settings.SettingsBase.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/settings.html#SettingsBase.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.SettingsBase.delete" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.settings.SettingsBase.edit">
+<span class="sig-name descname"><span class="pre">edit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/settings.html#SettingsBase.edit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.SettingsBase.edit" title="Permalink to this definition"></a></dt>
+<dd><p>Interactively edit a config (or other) file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.settings.SettingsBase.ensure_filesystem_registry">
+<span class="sig-name descname"><span class="pre">ensure_filesystem_registry</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/settings.html#SettingsBase.ensure_filesystem_registry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.SettingsBase.ensure_filesystem_registry" title="Permalink to this definition"></a></dt>
+<dd><p>Ensure that the settings has a filesystem registry.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="action_updater.main.settings.SettingsBase.filesystem_registry">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filesystem_registry</span></span><a class="headerlink" href="#action_updater.main.settings.SettingsBase.filesystem_registry" title="Permalink to this definition"></a></dt>
+<dd><p>Return the first found filesystem registry</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.settings.SettingsBase.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/settings.html#SettingsBase.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.SettingsBase.get" title="Permalink to this definition"></a></dt>
+<dd><p>Get a settings value, doing appropriate substitution and expansion.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.settings.SettingsBase.get_settings_file">
+<span class="sig-name descname"><span class="pre">get_settings_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/settings.html#SettingsBase.get_settings_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.SettingsBase.get_settings_file" title="Permalink to this definition"></a></dt>
+<dd><p>Get the preferred user settings file, set user settings if exists.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.settings.SettingsBase.inituser">
+<span class="sig-name descname"><span class="pre">inituser</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/settings.html#SettingsBase.inituser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.SettingsBase.inituser" title="Permalink to this definition"></a></dt>
+<dd><p>Create a user specific config in user’s home.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.settings.SettingsBase.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/settings.html#SettingsBase.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.SettingsBase.load" title="Permalink to this definition"></a></dt>
+<dd><p>Load the settings file into the settings object</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.settings.SettingsBase.parse_boolean">
+<span class="sig-name descname"><span class="pre">parse_boolean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/settings.html#SettingsBase.parse_boolean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.SettingsBase.parse_boolean" title="Permalink to this definition"></a></dt>
+<dd><p>If the value is True/False, ensure we return a boolean</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.settings.SettingsBase.parse_null">
+<span class="sig-name descname"><span class="pre">parse_null</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/settings.html#SettingsBase.parse_null"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.SettingsBase.parse_null" title="Permalink to this definition"></a></dt>
+<dd><p>Given a null or none from the command line, ensure parsed as None type</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.settings.SettingsBase.remove">
+<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/settings.html#SettingsBase.remove"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.SettingsBase.remove" title="Permalink to this definition"></a></dt>
+<dd><p>Remove a value from a list parameter</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.settings.SettingsBase.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/settings.html#SettingsBase.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.SettingsBase.save" title="Permalink to this definition"></a></dt>
+<dd><p>Save settings, but do not change order of anything.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.settings.SettingsBase.set">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/settings.html#SettingsBase.set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.SettingsBase.set" title="Permalink to this definition"></a></dt>
+<dd><p>Set a setting based on key and value. If the key has :, it’s nested</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.settings.SettingsBase.update_param">
+<span class="sig-name descname"><span class="pre">update_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/settings.html#SettingsBase.update_param"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.SettingsBase.update_param" title="Permalink to this definition"></a></dt>
+<dd><p>Given a parameter, update the configuration on the fly if it’s in set/add/remove</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.settings.SettingsBase.update_params">
+<span class="sig-name descname"><span class="pre">update_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/settings.html#SettingsBase.update_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.SettingsBase.update_params" title="Permalink to this definition"></a></dt>
+<dd><p>Update a configuration on the fly (no save) only for set/add/remove.
+Unlike the traditional set/get/add functions, this function expects
+each entry in the params list to start with the action, e.g.:</p>
+<p>set:name:value
+add:name:value
+rm:name:value</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.settings.SettingsBase.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/settings.html#SettingsBase.validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.settings.SettingsBase.validate" title="Permalink to this definition"></a></dt>
+<dd><p>Validate the loaded settings with jsonschema</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-action_updater.main.updater">
+<span id="action-updater-main-updater-module"></span><h2>action_updater.main.updater module<a class="headerlink" href="#module-action_updater.main.updater" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="action_updater.main.updater.UpdaterBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">action_updater.main.updater.</span></span><span class="sig-name descname"><span class="pre">UpdaterBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/updater.html#UpdaterBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.updater.UpdaterBase" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="action_updater.main.updater.UpdaterBase.classpath">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">classpath</span></span><a class="headerlink" href="#action_updater.main.updater.UpdaterBase.classpath" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.main.updater.UpdaterBase.date_time_format">
+<span class="sig-name descname"><span class="pre">date_time_format</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'%Y-%m-%dT%H:%M:%S%z'</span></em><a class="headerlink" href="#action_updater.main.updater.UpdaterBase.date_time_format" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.main.updater.UpdaterBase.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'An</span> <span class="pre">abstract</span> <span class="pre">base</span> <span class="pre">updater.'</span></em><a class="headerlink" href="#action_updater.main.updater.UpdaterBase.description" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.updater.UpdaterBase.detect">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">detect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/updater.html#UpdaterBase.detect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.updater.UpdaterBase.detect" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.updater.UpdaterBase.get_releases">
+<span class="sig-name descname"><span class="pre">get_releases</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/updater.html#UpdaterBase.get_releases"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.updater.UpdaterBase.get_releases" title="Permalink to this definition"></a></dt>
+<dd><p>Get the lateset release of an action (under flux-framework)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.updater.UpdaterBase.get_request">
+<span class="sig-name descname"><span class="pre">get_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/updater.html#UpdaterBase.get_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.updater.UpdaterBase.get_request" title="Permalink to this definition"></a></dt>
+<dd><p>Perform a GitHub get request (assume pagination)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.updater.UpdaterBase.get_tags">
+<span class="sig-name descname"><span class="pre">get_tags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/updater.html#UpdaterBase.get_tags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.updater.UpdaterBase.get_tags" title="Permalink to this definition"></a></dt>
+<dd><p>Get the lateset tags for a repository</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.updater.UpdaterBase.get_tags_lookup">
+<span class="sig-name descname"><span class="pre">get_tags_lookup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/updater.html#UpdaterBase.get_tags_lookup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.updater.UpdaterBase.get_tags_lookup" title="Permalink to this definition"></a></dt>
+<dd><p>This isn’t required to be sploot out, but it’s easier to debug / read if necessary</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.main.updater.UpdaterBase.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'updater'</span></em><a class="headerlink" href="#action_updater.main.updater.UpdaterBase.name" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="action_updater.main.updater.UpdaterBase.settings">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">settings</span></span><a class="headerlink" href="#action_updater.main.updater.UpdaterBase.settings" title="Permalink to this definition"></a></dt>
+<dd><p>Get settings specific to updater</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="action_updater.main.updater.UpdaterBase.slug">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">slug</span></span><a class="headerlink" href="#action_updater.main.updater.UpdaterBase.slug" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.main.updater.UpdaterBase.static_files">
+<span class="sig-name descname"><span class="pre">static_files</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#action_updater.main.updater.UpdaterBase.static_files" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="action_updater.main.updater.UpdaterBase.title">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#action_updater.main.updater.UpdaterBase.title" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.updater.UpdaterBase.update_token">
+<span class="sig-name descname"><span class="pre">update_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/updater.html#UpdaterBase.update_token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.updater.UpdaterBase.update_token" title="Permalink to this definition"></a></dt>
+<dd><p>Set token and headers, if found</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.updater.UpdaterBase.validate_settings">
+<span class="sig-name descname"><span class="pre">validate_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/updater.html#UpdaterBase.validate_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.updater.UpdaterBase.validate_settings" title="Permalink to this definition"></a></dt>
+<dd><p>If settings are provided (and the updater has a schema) ensure we validate.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="action_updater.main.updater.UpdaterFinder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">action_updater.main.updater.</span></span><span class="sig-name descname"><span class="pre">UpdaterFinder</span></span><a class="reference internal" href="../_modules/action_updater/main/updater.html#UpdaterFinder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.updater.UpdaterFinder" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></p>
+<p>Create a cache of available updaters.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.main.updater.UpdaterFinder.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main/updater.html#UpdaterFinder.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.updater.UpdaterFinder.load" title="Permalink to this definition"></a></dt>
+<dd><p>Load new updaters</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-action_updater.main">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-action_updater.main" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.main.get_client">
+<span class="sig-prename descclassname"><span class="pre">action_updater.main.</span></span><span class="sig-name descname"><span class="pre">get_client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quiet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/main.html#get_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.main.get_client" title="Permalink to this definition"></a></dt>
+<dd><p>Get an actions updater client.</p>
+<p>This will ensure we add all of the default updaters to our client.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="action_updater.client.html" class="btn btn-neutral float-left" title="action_updater.client package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="action_updater.main.updaters.html" class="btn btn-neutral float-right" title="action_updater.main.updaters package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Vanessa Sochat.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

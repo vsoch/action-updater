@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Guide &mdash; Action Updater 0.0.11 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Developer Guide" href="developer-guide.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Action Updater
+          </a>
+              <div class="version">
+                0.0.11
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#commands">⭐️ Commands ⭐️</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#list">List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#detect">Detect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update">Update</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#updaters">Updaters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#version">Version</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#version-settings">Version Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#set-output-env-and-save-state">Set Output / Env and Save State</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="developer-guide.html">Developer Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../source/modules.html">action_updater</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Action Updater</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Getting Started</a> &raquo;</li>
+      <li>User Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/getting_started/user-guide.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="user-guide">
+<span id="getting-started-user-guide"></span><h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this heading"></a></h1>
+<p>The Action Updater will make it easy to update commands or versions in GitHub actions (yaml workflow) files.
+I created this tool after having to manually update workflow files across several repos in a week,
+and realizing this would not scale (and I largely didn’t want to do it more than once). Unlike
+similar automation that exists only on GitHub (e.g., a Dependabot or similar to update), the
+Action Updater is intended to be customizable to help control how you update, and modular to make it
+easy to implement new updaters as they are needed. I hope this tool is useful to you, and please
+report any bugs, issues, or features request on the <a class="reference external" href="https://github.com/vsoch/action-updater">GitHub issue tracker</a>.
+If you haven’t read <a class="reference internal" href="installation.html#getting-started-installation"><span class="std std-ref">Installation</span></a> you should do that first.</p>
+<section id="quick-start">
+<span id="getting-started-quick-start"></span><h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
+<p>There are two primary functions - to <code class="docutils literal notranslate"><span class="pre">detect</span></code> and <code class="docutils literal notranslate"><span class="pre">update</span></code>!
+The first previews changes to a workflow file (or directory) and the
+second writes the changes to file.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>action-updater detect .github/workfows/main.yaml
+<span class="gp">$ </span>action-updater update .github/workfows/main.yaml
+</pre></div>
+</div>
+<p>And that’s it! The action comes with several <span class="xref std std-ref">getting-started_updaters`</span> that will look
+for particular aspects to lint or update. If you have a request for a new updated, please
+<a class="reference external" href="https://github.com/vsoch/action-updater/issues">open an issue</a>,  More detailed usage
+and examples are detailed below.</p>
+</section>
+<section id="setup">
+<span id="getting-started-setup"></span><h2>Setup<a class="headerlink" href="#setup" title="Permalink to this heading"></a></h2>
+<p>Setup is minimal (and usually not required), however if you have strong feelings about
+configuring the colors or formatting, or the GitHub organziations that we use major versions for
+(e.g., the default will be a small set and us commits with commented versions otherwise) there are
+several ways to control settings. The library ships with it’s own default settings, provided at
+<a class="reference external" href="https://github.com/vsoch/action-updater/blob/main/action_updater/settings.yml">action_updated/settings.yml</a> and you are free to update these directly alongside the install,
+provide a settings file:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>action-updater --settings-file /path/to/my-settings.yml &lt;command&gt;
+</pre></div>
+</div>
+<p>You can also provide a “one off” setting:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>action-updater -c set:key:value &lt;command&gt; &lt;args&gt;
+<span class="gp">$ </span>action-updater -c add:listkey:value &lt;command&gt; &lt;args&gt;
+<span class="gp">$ </span>action-updater -c rm:listkey:value
+</pre></div>
+</div>
+<p>or init your own settings to customize in your user home (it will be found and used in preference of the root install):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>action-updater config inituser
+<span class="go">Created user settings file /home/vanessasaur/.action-updater/settings.yml</span>
+</pre></div>
+</div>
+<p>You can look at settings for each <a class="reference internal" href="#getting-started-updaters"><span class="std std-ref">Updaters</span></a> or global tool settings, described below.</p>
+<p id="getting-started-settings">The following “global” settings (not specific to an updater) are defined!</p>
+<table class="colwidths-given docutils align-default" id="id3">
+<caption><span class="caption-text">Settings</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 65%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>config_editor</p></td>
+<td><p>Default config editor to use</p></td>
+<td><p>vim</p></td>
+</tr>
+<tr class="row-odd"><td><p>github_api</p></td>
+<td><p>Default GitHub API root to use, given updaters that require it</p></td>
+<td><p><a class="reference external" href="https://api.github.com">https://api.github.com</a></p></td>
+</tr>
+<tr class="row-even"><td><p>code_theme</p></td>
+<td><p>Code theme to use for diff (from <a class="reference external" href="https://pygments.org/docs/styles/#builtin-styles">Pygments</a>)</p></td>
+<td><p>vim</p></td>
+</tr>
+<tr class="row-odd"><td><p>updaters</p></td>
+<td><p>Nested schemas for validators, discussed alongside updaters in this user guide.</p></td>
+<td><p>(updater defaults or unset)</p></td>
+</tr>
+</tbody>
+</table>
+<p>Do I have a preference for vim? Yes, yes I do. 🦹</p>
+</section>
+<section id="commands">
+<span id="getting-started-usage"></span><h2>⭐️ Commands ⭐️<a class="headerlink" href="#commands" title="Permalink to this heading"></a></h2>
+<p>For all commands below, the actions updater can accept a directory with yaml files,
+or a single yaml file. To start, we expect a directory with yaml or a direct path
+to a yaml file. Every yaml file provided must match the <a class="reference external" href="https://github.com/softprops/github-actions-schemas/blob/master/workflow.json">GitHub actions schema</a>,
+until there is proven reason to not require this.</p>
+<section id="list">
+<span id="getting-started-usage-list"></span><h3>List<a class="headerlink" href="#list" title="Permalink to this heading"></a></h3>
+<p>View updaters available (and descriptions)</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>action-updater list-updaters
+<span class="go">┏━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓</span>
+<span class="go">┃ Title      ┃ Identifier ┃ Description                           ┃</span>
+<span class="go">┡━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩</span>
+<span class="go">│ Set-output │ setoutput  │ update deprecated set-output commands │</span>
+<span class="go">│ Set-env    │ setenv     │ update deprecated set-env commands    │</span>
+<span class="go">│ Version    │ version    │ update action versions                │</span>
+<span class="go">│ Save-state │ savestate  │ update deprecated save-state commands │</span>
+<span class="go">└────────────┴────────────┴───────────────────────────────────────┘</span>
+</pre></div>
+</div>
+<p>The “Identifier” is what you can use to select an updater with <code class="docutils literal notranslate"><span class="pre">-u</span></code>.</p>
+</section>
+<section id="detect">
+<span id="getting-started-usage-detect"></span><h3>Detect<a class="headerlink" href="#detect" title="Permalink to this heading"></a></h3>
+<p>The detect command can be run on any action file (or folder) to determine
+if you have old syntax or action versions.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>action-updater detect .github/workfows/main.yaml
+</pre></div>
+</div>
+<p>If a file has updates, it will print to the terminal the updated file for preview.</p>
+<img alt="../_images/detect.png" src="../_images/detect.png" />
+<p>And after you run <code class="docutils literal notranslate"><span class="pre">update</span></code> (described below) you will see all green!</p>
+<img alt="../_images/clean.png" src="../_images/clean.png" />
+<p>You can also select to use one or more specific updaters (add multiple <code class="docutils literal notranslate"><span class="pre">-u`</span></code> or <code class="docutils literal notranslate"><span class="pre">`--updater`</span></code>):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>action-updater detect -u setoutput .github/workfows/main.yaml
+</pre></div>
+</div>
+</section>
+<section id="update">
+<span id="getting-started-usage-update"></span><h3>Update<a class="headerlink" href="#update" title="Permalink to this heading"></a></h3>
+<p>An update command performs a detect, but then writes changes to the file.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>action-updater update .github/workfows/main.yaml
+</pre></div>
+</div>
+<p>And you can run for all files in your <code class="docutils literal notranslate"><span class="pre">.github/workflows</span></code> directory!</p>
+<img alt="../_images/updates.png" src="../_images/updates.png" />
+<p>For either of the <code class="docutils literal notranslate"><span class="pre">update</span></code> or <code class="docutils literal notranslate"><span class="pre">detect</span></code> commands, turn off details by
+adding the <code class="docutils literal notranslate"><span class="pre">--no-details</span></code> flag. Also for both, exporting a <code class="docutils literal notranslate"><span class="pre">GITHUB_TOKEN</span></code>
+will increase API limits for any checks of tags/releases.</p>
+<p>Please <a class="reference external" href="https://github.com/vsoch/action-updater">open an issue</a> if you’d like
+to see other functionality or updaters!</p>
+</section>
+</section>
+<section id="updaters">
+<span id="getting-started-updaters"></span><h2>Updaters<a class="headerlink" href="#updaters" title="Permalink to this heading"></a></h2>
+<p>Each updater:</p>
+<ul class="simple">
+<li><p>Is provided as a directory under <a class="reference external" href="https://github.com/vsoch/action-updater/tree/main/action_updater/main/updaters">action_updater/main/updaters</a></p></li>
+<li><p>Is allowed a settings.yml entry under <code class="docutils literal notranslate"><span class="pre">updaters</span></code> and the directory name</p></li>
+<li><p>Can provide it’s own custom schema to validate the entry!</p></li>
+</ul>
+<p>And has those defaults and other metadata briefly documented here!</p>
+<section id="version">
+<h3>Version<a class="headerlink" href="#version" title="Permalink to this heading"></a></h3>
+<p>The version updater is intended to update actions uses in steps. Specifically:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>For “trusted” orgs (those under <code class="docutils literal notranslate"><span class="pre">orgs_major</span></code> attribute in the updater settings) we use major versions (e.g., <code class="docutils literal notranslate"><span class="pre">actions/checkout&#64;v3</span></code>)</p></li>
+<li><p>For all others, we find the latest release tag, and then use the commit (and add a comment for the tag)</p></li>
+</ul>
+</div></blockquote>
+<p>These are the defaults. To remove trusted repos, empty this list. If you want
+other functionality, please <a class="reference external" href="https://github.com/vsoch/action-updater">open an issue</a>,
+For version sorting and updates, we use <a class="reference external" href="https://vsoch.github.io/pipelib">pipelib</a>.</p>
+<section id="version-settings">
+<h4>Version Settings<a class="headerlink" href="#version-settings" title="Permalink to this heading"></a></h4>
+<table class="colwidths-given docutils align-default" id="id4">
+<caption><span class="caption-text">Version Updater Settings</span><a class="headerlink" href="#id4" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 65%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>major_orgs</p></td>
+<td><p>List of GitHub organizations to “trust” and use major versions for (instead of tagged commits)</p></td>
+<td><p>major_orgs</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="set-output-env-and-save-state">
+<h3>Set Output / Env and Save State<a class="headerlink" href="#set-output-env-and-save-state" title="Permalink to this heading"></a></h3>
+<p>These (three separate) updaters will find each of deprecated <code class="docutils literal notranslate"><span class="pre">set-output</span></code>, <code class="docutils literal notranslate"><span class="pre">save-state</span></code>, and <code class="docutils literal notranslate"><span class="pre">set-env</span></code> directives and update them to use piping to <code class="docutils literal notranslate"><span class="pre">`GITHUB_OUTPUT</span></code>
+<code class="docutils literal notranslate"><span class="pre">GITHUB_STATE</span></code>, and <code class="docutils literal notranslate"><span class="pre">GITHUB_ENV</span></code>, respectively.  You can <a class="reference external" href="https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands">read about the deprecation here</a>.
+These updaters do not have any arguments. The <code class="docutils literal notranslate"><span class="pre">set-env</span></code> directive was done earlier, and largely it shouldn’t be in used anymore.
+These updaters do not have any custom settings, as the updates are fairly straight forward. One possible preference is to use printf instead of echo,
+but I didn’t implement this yet as I think it’s fairly trivial.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="developer-guide.html" class="btn btn-neutral float-right" title="Developer Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Vanessa Sochat.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

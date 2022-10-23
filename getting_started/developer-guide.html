@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Developer Guide &mdash; Action Updater 0.0.11 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="action_updater" href="../source/modules.html" />
+    <link rel="prev" title="User Guide" href="user-guide.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Action Updater
+          </a>
+              <div class="version">
+                0.0.11
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Developer Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#linting">Linting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#developing-an-updater">Developing an Updater</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#updater-class">Updater Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#updater-metadata">Updater Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#updater-settings">Updater Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#updater-detect">Updater Detect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#updating-comments">Updating Comments</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../source/modules.html">action_updater</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Action Updater</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Getting Started</a> &raquo;</li>
+      <li>Developer Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/getting_started/developer-guide.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="developer-guide">
+<span id="getting-started-developer-guide"></span><h1>Developer Guide<a class="headerlink" href="#developer-guide" title="Permalink to this heading"></a></h1>
+<p>This developer guide includes more complex interactions like contributing
+modular updaters. If you haven’t read <a class="reference internal" href="installation.html#getting-started-installation"><span class="std std-ref">Installation</span></a>
+you should do that first.</p>
+<section id="linting">
+<span id="getting-started-developer-guide-linting"></span><h2>Linting<a class="headerlink" href="#linting" title="Permalink to this heading"></a></h2>
+<p>To lint your code, you can install pre-commit and other dependencies to your environment:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip install -r .github/dev-requirements.txt
+</pre></div>
+</div>
+<p>And run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pre-commit run --all-files
+</pre></div>
+</div>
+<p>Or install as a hook:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pre-commit install
+</pre></div>
+</div>
+</section>
+<section id="developing-an-updater">
+<span id="getting-started-developer-guide-developing-an-updater"></span><h2>Developing an Updater<a class="headerlink" href="#developing-an-updater" title="Permalink to this heading"></a></h2>
+<p>Each updater is required to have one file, <code class="docutils literal notranslate"><span class="pre">update.py</span></code> that uses the <code class="docutils literal notranslate"><span class="pre">UpdaterBase</span></code> class and
+has one function to <code class="docutils literal notranslate"><span class="pre">detect</span></code>. The easiest way to get this structure is to copy another updater completely,
+and use it as a template.</p>
+<section id="updater-class">
+<h3>Updater Class<a class="headerlink" href="#updater-class" title="Permalink to this heading"></a></h3>
+<p>Your updater class is discovered based on the module folder name. The class should be the uppercase of that,
+with <code class="docutils literal notranslate"><span class="pre">Updater</span></code> as a suffix. E.g.,:</p>
+<ul class="simple">
+<li><p>setoutput -&gt; SetoutputUpdater</p></li>
+<li><p>version -&gt; VersionUpdater</p></li>
+</ul>
+<p>If you don’t follow this convention, we won’t be able to discover it and use it! You’ll also get errors
+and know very quickly.</p>
+</section>
+<section id="updater-metadata">
+<span id="getting-started-developer-guide-updater-metadata"></span><h3>Updater Metadata<a class="headerlink" href="#updater-metadata" title="Permalink to this heading"></a></h3>
+<p>You are required to have:</p>
+<ul class="simple">
+<li><p>description</p></li>
+<li><p>name (typically same as the folder name, but not required) must be all lowercase and only <code class="docutils literal notranslate"><span class="pre">-</span></code> for special characters</p></li>
+</ul>
+<p>Optionally, if you provide a schema (from <a class="reference external" href="https://python-jsonschema.readthedocs.io/en/stable/">jsonschema</a>) and set to the schema attribute, this will validate
+any user settings that your updater accepts. An example class definition is shown below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="c1"># Allow these orgs to use major version strings</span>
+        <span class="s2">&quot;major_orgs&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span> <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">}}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;additionalProperties&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">VersionUpdater</span><span class="p">(</span><span class="n">UpdaterBase</span><span class="p">):</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;version&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;update action versions&quot;</span>
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">schema</span>
+    <span class="n">cache</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">{}}</span>
+</pre></div>
+</div>
+<p>In the example above, notice we also have a “cache” that is used to store tags between runs.
+We can do this because the updater is instantiated at the beginning of a run, and then the same
+class used across workflow files. This means that if multiple files use <code class="docutils literal notranslate"><span class="pre">actions/checkout</span></code>
+(and thus the version updater needs to look up latest tags) we only do that once!</p>
+</section>
+<section id="updater-settings">
+<span id="getting-started-developer-guide-updater-settings"></span><h3>Updater Settings<a class="headerlink" href="#updater-settings" title="Permalink to this heading"></a></h3>
+<p>As shown above, when an updater defines a schema, this is matched to a block in settings.
+If you want your settings to have defaults, add the nested block under <code class="docutils literal notranslate"><span class="pre">updaters-&gt;&lt;name&gt;</span></code>. Here
+is an example in <code class="docutils literal notranslate"><span class="pre">action_updater/settings.yml</span></code> for the schema above:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">updaters</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># Repository orgs to allow a major version (and not commit)</span><span class="w"></span>
+<span class="w">    </span><span class="nt">major_orgs</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Since a developer user will likely be reading this file, it’s recommended to put some comments to explain different fields.</p>
+</section>
+<section id="updater-detect">
+<span id="getting-started-developer-guide-updater-detect"></span><h3>Updater Detect<a class="headerlink" href="#updater-detect" title="Permalink to this heading"></a></h3>
+<p>Your updater class has a main function <code class="docutils literal notranslate"><span class="pre">detect</span></code> that must exist. Any and all other classes are largely optional (and of course encouraged to have a modular design)!
+The function should expect an action (<cite>action_updater.main.action.GitHubAction</cite>) to be provided, and to look through the <cite>action.jobs</cite> and make any appropriate changes.
+Here is a basic example. Note that we:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Keep track of self.count, setting it to 0 in the beginning, and incrementing it for each change.</p></li>
+<li><p>Make changes directly to <code class="docutils literal notranslate"><span class="pre">job.steps</span></code>. Since this is a copy of the original config, this is what will be changed (and saved to file, if desired).</p></li>
+<li><p>Return a boolean to indicate if changes were detected.</p></li>
+</ul>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">detect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An example detection function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Set the count to 0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># No point if we don&#39;t have jobs!</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">action</span><span class="o">.</span><span class="n">jobs</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># For each job, look for steps-&gt;updater versions</span>
+    <span class="k">for</span> <span class="n">job_name</span><span class="p">,</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">action</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+        <span class="c1"># These are matched to steps</span>
+        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">job</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;steps&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+
+            <span class="c1"># Get a &quot;run&quot; section</span>
+            <span class="n">run</span> <span class="o">=</span> <span class="n">step</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">)</span>
+
+            <span class="c1"># Get some new updated content</span>
+            <span class="c1"># Perform checks for syntax, etc. here!</span>
+            <span class="n">updated_content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_update</span><span class="p">(</span><span class="n">run</span><span class="p">)</span>
+
+            <span class="c1"># Ensure to do a check to see if there are change</span>
+            <span class="k">if</span> <span class="n">updated_content</span> <span class="o">!=</span> <span class="n">step</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="c1"># To then update with changes:</span>
+                <span class="n">step</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">updated_content</span>
+
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">!=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>The client will handle displaying changes and otherwise saving updates, so you do not need to
+worry about that. The <code class="docutils literal notranslate"><span class="pre">UpdaterClass</span></code> also has several courtesy functions for gettings tags (<code class="docutils literal notranslate"><span class="pre">get_tags_lookup</span></code> or <code class="docutils literal notranslate"><span class="pre">get_tags</span></code>
+along with releases (<code class="docutils literal notranslate"><span class="pre">get_releases</span></code>) and you can take advantage of them, or add additional API calls if needed to the base class.
+The updater will also be automatically detected and registered, and included in basic testing, however you do need
+to add a “before” and “after” set of yaml files, discussed next.</p>
+</section>
+<section id="testing">
+<span id="getting-started-developer-guide-testing"></span><h3>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h3>
+<p>Each updater should have a <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;-before.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;-after.yaml</span></code> in <code class="docutils literal notranslate"><span class="pre">action_updater/tests/data</span></code>.
+The format is simple - it should be a GitHub workflow (any of your choosing!) before and after running an update.
+The easiest way to make this is to create a “before” file manually (with updates you know need to happen)
+(in Python) create a client, run detect, and then write to an after file. And be sure to check that your
+updater worked  as you would like! Here is an example (what I used for my test cases):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">action_updater.main</span> <span class="kn">import</span> <span class="n">get_client</span>
+<span class="n">cli</span> <span class="o">=</span> <span class="n">get_client</span><span class="p">()</span>
+
+<span class="c1"># Before and after files (assuming in present working directory)</span>
+<span class="n">before_file</span> <span class="o">=</span> <span class="s2">&quot;save-state-before.yaml&quot;</span>
+<span class="n">after_file</span> <span class="o">=</span> <span class="s2">&quot;save-state-after.yaml&quot;</span>
+
+<span class="c1"># Run detect *only* for the updater you care about</span>
+<span class="n">action</span> <span class="o">=</span> <span class="n">cli</span><span class="o">.</span><span class="n">detect</span><span class="p">(</span><span class="n">before_file</span><span class="p">,</span> <span class="n">updaters</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;savestate&#39;</span><span class="p">])</span>
+
+<span class="c1"># Write changes to new file (then check it!)</span>
+<span class="n">action</span><span class="p">[</span><span class="n">before_file</span><span class="p">]</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">after_file</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And then visually check it - and you should be done! These files will be used in testing,
+along with testing basic output and metadata for your updater. If you have an idea for an updater but
+don’t have bandwidth to add? Please ping &#64;vsoch by opening an issue!</p>
+</section>
+<section id="updating-comments">
+<span id="getting-started-developer-guide-updater-comments"></span><h3>Updating Comments<a class="headerlink" href="#updating-comments" title="Permalink to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">action.jobs</span></code> objects that you interact with are actually annotated with comments! If you want to update
+them, I’ve found a good way to do this is to interact with the <code class="docutils literal notranslate"><span class="pre">step.ca.items</span></code> (or other json attribte).
+Basically, this is a lookup of items (based on the key index) for which there is a list that corresponds to
+the comment location. I found that what works is to define a new set of empty comments, and then to
+use the provided function (by ruamel) to set one:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Update the uses step with some new content</span>
+<span class="n">step</span><span class="p">[</span><span class="s2">&quot;uses&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">updated</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Delete all locations of comments for it</span>
+<span class="n">step</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="s2">&quot;uses&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+<span class="c1"># Add the &quot;end of line&quot; comment (the third one) - will add a CommentedToken</span>
+<span class="n">step</span><span class="o">.</span><span class="n">yaml_add_eol_comment</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;# </span><span class="si">{</span><span class="n">comment</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;uses&quot;</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that you might want to do something more elegant (e.g., grab the previous comments in positions 0,1,3)
+or whichever you want to preserve, to save before writing the new EOL comment.
+You can look at the <code class="docutils literal notranslate"><span class="pre">version</span></code> updater for this full example. It is how we annotate the end
+of the line with a new commented version.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="user-guide.html" class="btn btn-neutral float-left" title="User Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../source/modules.html" class="btn btn-neutral float-right" title="action_updater" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Vanessa Sochat.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>action_updater.utils package &mdash; Action Updater 0.0.11 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="action_updater.main.updaters.version package" href="action_updater.main.updaters.version.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Action Updater
+          </a>
+              <div class="version">
+                0.0.11
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/user-guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/developer-guide.html">Developer Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">action_updater</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="action_updater.html">action_updater package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="action_updater.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="action_updater.client.html">action_updater.client package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html">action_updater.main package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">action_updater.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.html#module-action_updater.defaults">action_updater.defaults module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.html#module-action_updater.logger">action_updater.logger module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.html#module-action_updater.version">action_updater.version module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.html#module-action_updater">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Action Updater</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">action_updater</a> &raquo;</li>
+          <li><a href="action_updater.html">action_updater package</a> &raquo;</li>
+      <li>action_updater.utils package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/action_updater.utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="action-updater-utils-package">
+<h1>action_updater.utils package<a class="headerlink" href="#action-updater-utils-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-action_updater.utils.fileio">
+<span id="action-updater-utils-fileio-module"></span><h2>action_updater.utils.fileio module<a class="headerlink" href="#module-action_updater.utils.fileio" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.utils.fileio.copyfile">
+<span class="sig-prename descclassname"><span class="pre">action_updater.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">copyfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/utils/fileio.html#copyfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.utils.fileio.copyfile" title="Permalink to this definition"></a></dt>
+<dd><p>Copy a file from a source to its destination.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.utils.fileio.get_tmpdir">
+<span class="sig-prename descclassname"><span class="pre">action_updater.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">get_tmpdir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tmpdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/utils/fileio.html#get_tmpdir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.utils.fileio.get_tmpdir" title="Permalink to this definition"></a></dt>
+<dd><p>Get a temporary directory for an operation.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.utils.fileio.get_tmpfile">
+<span class="sig-prename descclassname"><span class="pre">action_updater.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">get_tmpfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tmpdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/utils/fileio.html#get_tmpfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.utils.fileio.get_tmpfile" title="Permalink to this definition"></a></dt>
+<dd><p>Get a temporary file with an optional prefix.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.utils.fileio.get_yaml_string">
+<span class="sig-prename descclassname"><span class="pre">action_updater.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">get_yaml_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/utils/fileio.html#get_yaml_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.utils.fileio.get_yaml_string" title="Permalink to this definition"></a></dt>
+<dd><p>Get yaml output as string</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.utils.fileio.mkdir_p">
+<span class="sig-prename descclassname"><span class="pre">action_updater.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">mkdir_p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/utils/fileio.html#mkdir_p"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.utils.fileio.mkdir_p" title="Permalink to this definition"></a></dt>
+<dd><p>Make a directory path if it does not exist, akin to mkdir -p</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.utils.fileio.mkdirp">
+<span class="sig-prename descclassname"><span class="pre">action_updater.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">mkdirp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirnames</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/utils/fileio.html#mkdirp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.utils.fileio.mkdirp" title="Permalink to this definition"></a></dt>
+<dd><p>Create one or more directories</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.utils.fileio.print_json">
+<span class="sig-prename descclassname"><span class="pre">action_updater.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">print_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/utils/fileio.html#print_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.utils.fileio.print_json" title="Permalink to this definition"></a></dt>
+<dd><p>Print json pretty</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.utils.fileio.read_file">
+<span class="sig-prename descclassname"><span class="pre">action_updater.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">read_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/utils/fileio.html#read_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.utils.fileio.read_file" title="Permalink to this definition"></a></dt>
+<dd><p>Read a file.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.utils.fileio.read_json">
+<span class="sig-prename descclassname"><span class="pre">action_updater.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">read_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/utils/fileio.html#read_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.utils.fileio.read_json" title="Permalink to this definition"></a></dt>
+<dd><p>Read a json file to a dictionary.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.utils.fileio.read_yaml">
+<span class="sig-prename descclassname"><span class="pre">action_updater.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">read_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/utils/fileio.html#read_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.utils.fileio.read_yaml" title="Permalink to this definition"></a></dt>
+<dd><p>Load a yaml from file, roundtrip to preserve comments</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.utils.fileio.recursive_find">
+<span class="sig-prename descclassname"><span class="pre">action_updater.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">recursive_find</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/utils/fileio.html#recursive_find"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.utils.fileio.recursive_find" title="Permalink to this definition"></a></dt>
+<dd><p>Find filenames that match a particular pattern, and yield them.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.utils.fileio.write_file">
+<span class="sig-prename descclassname"><span class="pre">action_updater.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">write_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'w'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/utils/fileio.html#write_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.utils.fileio.write_file" title="Permalink to this definition"></a></dt>
+<dd><p>Write content to a filename</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.utils.fileio.write_json">
+<span class="sig-prename descclassname"><span class="pre">action_updater.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">write_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'w'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/utils/fileio.html#write_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.utils.fileio.write_json" title="Permalink to this definition"></a></dt>
+<dd><p>Write json to a filename</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.utils.fileio.write_yaml">
+<span class="sig-prename descclassname"><span class="pre">action_updater.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">write_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/utils/fileio.html#write_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.utils.fileio.write_yaml" title="Permalink to this definition"></a></dt>
+<dd><p>Save yaml to file, also preserving comments.</p>
+</dd></dl>
+
+</section>
+<section id="module-action_updater.utils.terminal">
+<span id="action-updater-utils-terminal-module"></span><h2>action_updater.utils.terminal module<a class="headerlink" href="#module-action_updater.utils.terminal" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.utils.terminal.confirm_action">
+<span class="sig-prename descclassname"><span class="pre">action_updater.utils.terminal.</span></span><span class="sig-name descname"><span class="pre">confirm_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/utils/terminal.html#confirm_action"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.utils.terminal.confirm_action" title="Permalink to this definition"></a></dt>
+<dd><p>confirm if the user wants to perform a certain action</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h3>
+<p>question: the question that will be asked
+force: if the user wants to skip the prompt</p>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.utils.terminal.get_installdir">
+<span class="sig-prename descclassname"><span class="pre">action_updater.utils.terminal.</span></span><span class="sig-name descname"><span class="pre">get_installdir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/utils/terminal.html#get_installdir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.utils.terminal.get_installdir" title="Permalink to this definition"></a></dt>
+<dd><p>get the installation directory of the application</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.utils.terminal.run_command">
+<span class="sig-prename descclassname"><span class="pre">action_updater.utils.terminal.</span></span><span class="sig-name descname"><span class="pre">run_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sudo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stream</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/utils/terminal.html#run_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.utils.terminal.run_command" title="Permalink to this definition"></a></dt>
+<dd><p>run_command uses subprocess to send a command to the terminal.</p>
+<section id="id1">
+<h3>Parameters<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>cmd: the command to send, should be a list for subprocess
+error_message: the error message to give to user if fails,
+if none specified, will alert that command failed.</p>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-action_updater.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-action_updater.utils" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="action_updater.main.updaters.version.html" class="btn btn-neutral float-left" title="action_updater.main.updaters.version package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Vanessa Sochat.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

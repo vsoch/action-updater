@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>action_updater package &mdash; Action Updater 0.0.11 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="action_updater.client package" href="action_updater.client.html" />
+    <link rel="prev" title="action_updater" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Action Updater
+          </a>
+              <div class="version">
+                0.0.11
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/user-guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/developer-guide.html">Developer Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">action_updater</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">action_updater package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.client.html">action_updater.client package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html">action_updater.main package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.utils.html">action_updater.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-action_updater.defaults">action_updater.defaults module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-action_updater.logger">action_updater.logger module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#action_updater.logger.ColorizingStreamHandler"><code class="docutils literal notranslate"><span class="pre">ColorizingStreamHandler</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#action_updater.logger.LogColors"><code class="docutils literal notranslate"><span class="pre">LogColors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#action_updater.logger.Logger"><code class="docutils literal notranslate"><span class="pre">Logger</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#action_updater.logger.Table"><code class="docutils literal notranslate"><span class="pre">Table</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#action_updater.logger.add_prefix"><code class="docutils literal notranslate"><span class="pre">add_prefix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#action_updater.logger.setup_logger"><code class="docutils literal notranslate"><span class="pre">setup_logger()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#action_updater.logger.underline"><code class="docutils literal notranslate"><span class="pre">underline()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-action_updater.version">action_updater.version module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-action_updater">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Action Updater</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">action_updater</a> &raquo;</li>
+      <li>action_updater package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/action_updater.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="action-updater-package">
+<h1>action_updater package<a class="headerlink" href="#action-updater-package" title="Permalink to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="action_updater.client.html">action_updater.client package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.client.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.client.html#module-action_updater.client.config">action_updater.client.config module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.client.html#action_updater.client.config.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.client.html#module-action_updater.client.detect">action_updater.client.detect module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.client.html#action_updater.client.detect.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.client.html#module-action_updater.client.listing">action_updater.client.listing module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.client.html#action_updater.client.listing.list_updaters"><code class="docutils literal notranslate"><span class="pre">list_updaters()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.client.html#module-action_updater.client.update">action_updater.client.update module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.client.html#action_updater.client.update.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.client.html#module-action_updater.client">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.client.html#action_updater.client.get_parser"><code class="docutils literal notranslate"><span class="pre">get_parser()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.client.html#action_updater.client.run_action_updater"><code class="docutils literal notranslate"><span class="pre">run_action_updater()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="action_updater.main.html">action_updater.main package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.main.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.main.updaters.html">action_updater.main.updaters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.updaters.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.updaters.html#module-action_updater.main.updaters">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.main.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.main.html#module-action_updater.main.action">action_updater.main.action module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.main.html#action_updater.main.action.GitHubAction"><code class="docutils literal notranslate"><span class="pre">GitHubAction</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.action.GitHubAction.diff"><code class="docutils literal notranslate"><span class="pre">GitHubAction.diff()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.action.GitHubAction.has_changes"><code class="docutils literal notranslate"><span class="pre">GitHubAction.has_changes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.action.GitHubAction.jobs"><code class="docutils literal notranslate"><span class="pre">GitHubAction.jobs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.action.GitHubAction.render_after"><code class="docutils literal notranslate"><span class="pre">GitHubAction.render_after()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.action.GitHubAction.render_before"><code class="docutils literal notranslate"><span class="pre">GitHubAction.render_before()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.action.GitHubAction.write"><code class="docutils literal notranslate"><span class="pre">GitHubAction.write()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.main.html#module-action_updater.main.client">action_updater.main.client module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.main.html#action_updater.main.client.ActionUpdater"><code class="docutils literal notranslate"><span class="pre">ActionUpdater</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.client.ActionUpdater.detect"><code class="docutils literal notranslate"><span class="pre">ActionUpdater.detect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.client.ActionUpdater.iter_paths"><code class="docutils literal notranslate"><span class="pre">ActionUpdater.iter_paths()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.client.ActionUpdater.update"><code class="docutils literal notranslate"><span class="pre">ActionUpdater.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.client.ActionUpdater.updaters"><code class="docutils literal notranslate"><span class="pre">ActionUpdater.updaters</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.main.html#module-action_updater.main.github">action_updater.main.github module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.main.html#action_updater.main.github.sort_major"><code class="docutils literal notranslate"><span class="pre">sort_major()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.main.html#action_updater.main.github.sort_tags"><code class="docutils literal notranslate"><span class="pre">sort_tags()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.main.html#module-action_updater.main.schemas">action_updater.main.schemas module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.main.html#module-action_updater.main.settings">action_updater.main.settings module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.OrderedList"><code class="docutils literal notranslate"><span class="pre">OrderedList()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.Settings"><code class="docutils literal notranslate"><span class="pre">Settings</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.SettingsBase"><code class="docutils literal notranslate"><span class="pre">SettingsBase</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.SettingsBase.add"><code class="docutils literal notranslate"><span class="pre">SettingsBase.add()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.SettingsBase.change_validate"><code class="docutils literal notranslate"><span class="pre">SettingsBase.change_validate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.SettingsBase.delete"><code class="docutils literal notranslate"><span class="pre">SettingsBase.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.SettingsBase.edit"><code class="docutils literal notranslate"><span class="pre">SettingsBase.edit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.SettingsBase.ensure_filesystem_registry"><code class="docutils literal notranslate"><span class="pre">SettingsBase.ensure_filesystem_registry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.SettingsBase.filesystem_registry"><code class="docutils literal notranslate"><span class="pre">SettingsBase.filesystem_registry</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.SettingsBase.get"><code class="docutils literal notranslate"><span class="pre">SettingsBase.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.SettingsBase.get_settings_file"><code class="docutils literal notranslate"><span class="pre">SettingsBase.get_settings_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.SettingsBase.inituser"><code class="docutils literal notranslate"><span class="pre">SettingsBase.inituser()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.SettingsBase.load"><code class="docutils literal notranslate"><span class="pre">SettingsBase.load()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.SettingsBase.parse_boolean"><code class="docutils literal notranslate"><span class="pre">SettingsBase.parse_boolean()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.SettingsBase.parse_null"><code class="docutils literal notranslate"><span class="pre">SettingsBase.parse_null()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.SettingsBase.remove"><code class="docutils literal notranslate"><span class="pre">SettingsBase.remove()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.SettingsBase.save"><code class="docutils literal notranslate"><span class="pre">SettingsBase.save()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.SettingsBase.set"><code class="docutils literal notranslate"><span class="pre">SettingsBase.set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.SettingsBase.update_param"><code class="docutils literal notranslate"><span class="pre">SettingsBase.update_param()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.SettingsBase.update_params"><code class="docutils literal notranslate"><span class="pre">SettingsBase.update_params()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.settings.SettingsBase.validate"><code class="docutils literal notranslate"><span class="pre">SettingsBase.validate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.main.html#module-action_updater.main.updater">action_updater.main.updater module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.main.html#action_updater.main.updater.UpdaterBase"><code class="docutils literal notranslate"><span class="pre">UpdaterBase</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.updater.UpdaterBase.classpath"><code class="docutils literal notranslate"><span class="pre">UpdaterBase.classpath</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.updater.UpdaterBase.date_time_format"><code class="docutils literal notranslate"><span class="pre">UpdaterBase.date_time_format</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.updater.UpdaterBase.description"><code class="docutils literal notranslate"><span class="pre">UpdaterBase.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.updater.UpdaterBase.detect"><code class="docutils literal notranslate"><span class="pre">UpdaterBase.detect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.updater.UpdaterBase.get_releases"><code class="docutils literal notranslate"><span class="pre">UpdaterBase.get_releases()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.updater.UpdaterBase.get_request"><code class="docutils literal notranslate"><span class="pre">UpdaterBase.get_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.updater.UpdaterBase.get_tags"><code class="docutils literal notranslate"><span class="pre">UpdaterBase.get_tags()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.updater.UpdaterBase.get_tags_lookup"><code class="docutils literal notranslate"><span class="pre">UpdaterBase.get_tags_lookup()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.updater.UpdaterBase.name"><code class="docutils literal notranslate"><span class="pre">UpdaterBase.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.updater.UpdaterBase.settings"><code class="docutils literal notranslate"><span class="pre">UpdaterBase.settings</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.updater.UpdaterBase.slug"><code class="docutils literal notranslate"><span class="pre">UpdaterBase.slug</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.updater.UpdaterBase.static_files"><code class="docutils literal notranslate"><span class="pre">UpdaterBase.static_files</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.updater.UpdaterBase.title"><code class="docutils literal notranslate"><span class="pre">UpdaterBase.title</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.updater.UpdaterBase.update_token"><code class="docutils literal notranslate"><span class="pre">UpdaterBase.update_token()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.updater.UpdaterBase.validate_settings"><code class="docutils literal notranslate"><span class="pre">UpdaterBase.validate_settings()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.main.html#action_updater.main.updater.UpdaterFinder"><code class="docutils literal notranslate"><span class="pre">UpdaterFinder</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="action_updater.main.html#action_updater.main.updater.UpdaterFinder.load"><code class="docutils literal notranslate"><span class="pre">UpdaterFinder.load()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.main.html#module-action_updater.main">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.main.html#action_updater.main.get_client"><code class="docutils literal notranslate"><span class="pre">get_client()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="action_updater.utils.html">action_updater.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.utils.html#module-action_updater.utils.fileio">action_updater.utils.fileio module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.utils.html#action_updater.utils.fileio.copyfile"><code class="docutils literal notranslate"><span class="pre">copyfile()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.utils.html#action_updater.utils.fileio.get_tmpdir"><code class="docutils literal notranslate"><span class="pre">get_tmpdir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.utils.html#action_updater.utils.fileio.get_tmpfile"><code class="docutils literal notranslate"><span class="pre">get_tmpfile()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.utils.html#action_updater.utils.fileio.get_yaml_string"><code class="docutils literal notranslate"><span class="pre">get_yaml_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.utils.html#action_updater.utils.fileio.mkdir_p"><code class="docutils literal notranslate"><span class="pre">mkdir_p()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.utils.html#action_updater.utils.fileio.mkdirp"><code class="docutils literal notranslate"><span class="pre">mkdirp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.utils.html#action_updater.utils.fileio.print_json"><code class="docutils literal notranslate"><span class="pre">print_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.utils.html#action_updater.utils.fileio.read_file"><code class="docutils literal notranslate"><span class="pre">read_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.utils.html#action_updater.utils.fileio.read_json"><code class="docutils literal notranslate"><span class="pre">read_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.utils.html#action_updater.utils.fileio.read_yaml"><code class="docutils literal notranslate"><span class="pre">read_yaml()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.utils.html#action_updater.utils.fileio.recursive_find"><code class="docutils literal notranslate"><span class="pre">recursive_find()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.utils.html#action_updater.utils.fileio.write_file"><code class="docutils literal notranslate"><span class="pre">write_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.utils.html#action_updater.utils.fileio.write_json"><code class="docutils literal notranslate"><span class="pre">write_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.utils.html#action_updater.utils.fileio.write_yaml"><code class="docutils literal notranslate"><span class="pre">write_yaml()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.utils.html#module-action_updater.utils.terminal">action_updater.utils.terminal module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.utils.html#action_updater.utils.terminal.confirm_action"><code class="docutils literal notranslate"><span class="pre">confirm_action()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.utils.html#action_updater.utils.terminal.get_installdir"><code class="docutils literal notranslate"><span class="pre">get_installdir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_updater.utils.html#action_updater.utils.terminal.run_command"><code class="docutils literal notranslate"><span class="pre">run_command()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_updater.utils.html#module-action_updater.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-action_updater.defaults">
+<span id="action-updater-defaults-module"></span><h2>action_updater.defaults module<a class="headerlink" href="#module-action_updater.defaults" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-action_updater.logger">
+<span id="action-updater-logger-module"></span><h2>action_updater.logger module<a class="headerlink" href="#module-action_updater.logger" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="action_updater.logger.ColorizingStreamHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">action_updater.logger.</span></span><span class="sig-name descname"><span class="pre">ColorizingStreamHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nocolor=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stream=&lt;_io.TextIOWrapper</span> <span class="pre">name='&lt;stderr&gt;'</span> <span class="pre">mode='w'</span> <span class="pre">encoding='utf-8'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_threads=False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#ColorizingStreamHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.ColorizingStreamHandler" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">StreamHandler</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.ColorizingStreamHandler.BLACK">
+<span class="sig-name descname"><span class="pre">BLACK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#action_updater.logger.ColorizingStreamHandler.BLACK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.ColorizingStreamHandler.BLUE">
+<span class="sig-name descname"><span class="pre">BLUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#action_updater.logger.ColorizingStreamHandler.BLUE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.ColorizingStreamHandler.BOLD_SEQ">
+<span class="sig-name descname"><span class="pre">BOLD_SEQ</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[1m'</span></em><a class="headerlink" href="#action_updater.logger.ColorizingStreamHandler.BOLD_SEQ" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.ColorizingStreamHandler.COLOR_SEQ">
+<span class="sig-name descname"><span class="pre">COLOR_SEQ</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[%dm'</span></em><a class="headerlink" href="#action_updater.logger.ColorizingStreamHandler.COLOR_SEQ" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.ColorizingStreamHandler.CYAN">
+<span class="sig-name descname"><span class="pre">CYAN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#action_updater.logger.ColorizingStreamHandler.CYAN" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.ColorizingStreamHandler.GREEN">
+<span class="sig-name descname"><span class="pre">GREEN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#action_updater.logger.ColorizingStreamHandler.GREEN" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.ColorizingStreamHandler.MAGENTA">
+<span class="sig-name descname"><span class="pre">MAGENTA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#action_updater.logger.ColorizingStreamHandler.MAGENTA" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.ColorizingStreamHandler.RED">
+<span class="sig-name descname"><span class="pre">RED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#action_updater.logger.ColorizingStreamHandler.RED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.ColorizingStreamHandler.RESET_SEQ">
+<span class="sig-name descname"><span class="pre">RESET_SEQ</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[0m'</span></em><a class="headerlink" href="#action_updater.logger.ColorizingStreamHandler.RESET_SEQ" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.ColorizingStreamHandler.WHITE">
+<span class="sig-name descname"><span class="pre">WHITE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></em><a class="headerlink" href="#action_updater.logger.ColorizingStreamHandler.WHITE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.ColorizingStreamHandler.YELLOW">
+<span class="sig-name descname"><span class="pre">YELLOW</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#action_updater.logger.ColorizingStreamHandler.YELLOW" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.ColorizingStreamHandler.can_color_tty">
+<span class="sig-name descname"><span class="pre">can_color_tty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#ColorizingStreamHandler.can_color_tty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.ColorizingStreamHandler.can_color_tty" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.ColorizingStreamHandler.colors">
+<span class="sig-name descname"><span class="pre">colors</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'CRITICAL':</span> <span class="pre">1,</span> <span class="pre">'DEBUG':</span> <span class="pre">4,</span> <span class="pre">'ERROR':</span> <span class="pre">1,</span> <span class="pre">'INFO':</span> <span class="pre">2,</span> <span class="pre">'WARNING':</span> <span class="pre">3}</span></em><a class="headerlink" href="#action_updater.logger.ColorizingStreamHandler.colors" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.ColorizingStreamHandler.decorate">
+<span class="sig-name descname"><span class="pre">decorate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#ColorizingStreamHandler.decorate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.ColorizingStreamHandler.decorate" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.ColorizingStreamHandler.emit">
+<span class="sig-name descname"><span class="pre">emit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#ColorizingStreamHandler.emit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.ColorizingStreamHandler.emit" title="Permalink to this definition"></a></dt>
+<dd><p>Emit a record.</p>
+<p>If a formatter is specified, it is used to format the record.
+The record is then written to the stream with a trailing newline.  If
+exception information is present, it is formatted using
+traceback.print_exception and appended to the stream.  If the stream
+has an ‘encoding’ attribute, it is used to determine how to do the
+output to the stream.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="action_updater.logger.ColorizingStreamHandler.is_tty">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_tty</span></span><a class="headerlink" href="#action_updater.logger.ColorizingStreamHandler.is_tty" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="action_updater.logger.LogColors">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">action_updater.logger.</span></span><span class="sig-name descname"><span class="pre">LogColors</span></span><a class="reference internal" href="../_modules/action_updater/logger.html#LogColors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.LogColors" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.LogColors.BOLD">
+<span class="sig-name descname"><span class="pre">BOLD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[1m'</span></em><a class="headerlink" href="#action_updater.logger.LogColors.BOLD" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.LogColors.ENDC">
+<span class="sig-name descname"><span class="pre">ENDC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[0m'</span></em><a class="headerlink" href="#action_updater.logger.LogColors.ENDC" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.LogColors.OKBLUE">
+<span class="sig-name descname"><span class="pre">OKBLUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[94m'</span></em><a class="headerlink" href="#action_updater.logger.LogColors.OKBLUE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.LogColors.OKCYAN">
+<span class="sig-name descname"><span class="pre">OKCYAN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[96m'</span></em><a class="headerlink" href="#action_updater.logger.LogColors.OKCYAN" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.LogColors.OKGREEN">
+<span class="sig-name descname"><span class="pre">OKGREEN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[92m'</span></em><a class="headerlink" href="#action_updater.logger.LogColors.OKGREEN" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.LogColors.PURPLE">
+<span class="sig-name descname"><span class="pre">PURPLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[95m'</span></em><a class="headerlink" href="#action_updater.logger.LogColors.PURPLE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.LogColors.RED">
+<span class="sig-name descname"><span class="pre">RED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[91m'</span></em><a class="headerlink" href="#action_updater.logger.LogColors.RED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.LogColors.UNDERLINE">
+<span class="sig-name descname"><span class="pre">UNDERLINE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[4m'</span></em><a class="headerlink" href="#action_updater.logger.LogColors.UNDERLINE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="action_updater.logger.LogColors.WARNING">
+<span class="sig-name descname"><span class="pre">WARNING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[93m'</span></em><a class="headerlink" href="#action_updater.logger.LogColors.WARNING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="action_updater.logger.Logger">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">action_updater.logger.</span></span><span class="sig-name descname"><span class="pre">Logger</span></span><a class="reference internal" href="../_modules/action_updater/logger.html#Logger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Logger" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.Logger.cleanup">
+<span class="sig-name descname"><span class="pre">cleanup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Logger.cleanup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Logger.cleanup" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.Logger.debug">
+<span class="sig-name descname"><span class="pre">debug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Logger.debug"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Logger.debug" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.Logger.error">
+<span class="sig-name descname"><span class="pre">error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Logger.error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Logger.error" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.Logger.exit">
+<span class="sig-name descname"><span class="pre">exit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Logger.exit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Logger.exit" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.Logger.handler">
+<span class="sig-name descname"><span class="pre">handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Logger.handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Logger.handler" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.Logger.info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Logger.info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Logger.info" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.Logger.location">
+<span class="sig-name descname"><span class="pre">location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Logger.location"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Logger.location" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.Logger.progress">
+<span class="sig-name descname"><span class="pre">progress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">done</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Logger.progress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Logger.progress" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.Logger.set_level">
+<span class="sig-name descname"><span class="pre">set_level</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Logger.set_level"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Logger.set_level" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.Logger.set_stream_handler">
+<span class="sig-name descname"><span class="pre">set_stream_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stream_handler</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Logger.set_stream_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Logger.set_stream_handler" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.Logger.shellcmd">
+<span class="sig-name descname"><span class="pre">shellcmd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Logger.shellcmd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Logger.shellcmd" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.Logger.text_handler">
+<span class="sig-name descname"><span class="pre">text_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Logger.text_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Logger.text_handler" title="Permalink to this definition"></a></dt>
+<dd><p>The default log handler prints the output to the console.
+Args:</p>
+<blockquote>
+<div><p>msg (dict):     the log message dictionary</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.Logger.warning">
+<span class="sig-name descname"><span class="pre">warning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Logger.warning"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Logger.warning" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.Logger.yellow">
+<span class="sig-name descname"><span class="pre">yellow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Logger.yellow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Logger.yellow" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="action_updater.logger.Table">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">action_updater.logger.</span></span><span class="sig-name descname"><span class="pre">Table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Table" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Format a list of dicts into a table</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.Table.available_width">
+<span class="sig-name descname"><span class="pre">available_width</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Table.available_width"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Table.available_width" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate available width based on fields we cannot truncate (urls)</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="action_updater.logger.Table.color">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">color</span></span><a class="headerlink" href="#action_updater.logger.Table.color" title="Permalink to this definition"></a></dt>
+<dd><p>Return a random color</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.Table.ensure_complete">
+<span class="sig-name descname"><span class="pre">ensure_complete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Table.ensure_complete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Table.ensure_complete" title="Permalink to this definition"></a></dt>
+<dd><p>If any data missing fields, ensure they are included</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.Table.show">
+<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Table.show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Table.show" title="Permalink to this definition"></a></dt>
+<dd><p>Pretty print a table of content</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.Table.table_columns">
+<span class="sig-name descname"><span class="pre">table_columns</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Table.table_columns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Table.table_columns" title="Permalink to this definition"></a></dt>
+<dd><p>Shared function to return consistent table columns</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_updater.logger.Table.table_rows">
+<span class="sig-name descname"><span class="pre">table_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#Table.table_rows"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.Table.table_rows" title="Permalink to this definition"></a></dt>
+<dd><p>Shared function to yield rows as a list</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.logger.add_prefix">
+<span class="sig-prename descclassname"><span class="pre">action_updater.logger.</span></span><span class="sig-name descname"><span class="pre">add_prefix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">char</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&gt;&gt;'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#add_prefix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.add_prefix" title="Permalink to this definition"></a></dt>
+<dd><p>Add an “OKBLUE” prefix to a message</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.logger.setup_logger">
+<span class="sig-prename descclassname"><span class="pre">action_updater.logger.</span></span><span class="sig-name descname"><span class="pre">setup_logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quiet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">printshellcmds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nocolor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wms_monitor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#setup_logger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.setup_logger" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_updater.logger.underline">
+<span class="sig-prename descclassname"><span class="pre">action_updater.logger.</span></span><span class="sig-name descname"><span class="pre">underline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/action_updater/logger.html#underline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#action_updater.logger.underline" title="Permalink to this definition"></a></dt>
+<dd><p>Return an underlined message</p>
+</dd></dl>
+
+</section>
+<section id="module-action_updater.version">
+<span id="action-updater-version-module"></span><h2>action_updater.version module<a class="headerlink" href="#module-action_updater.version" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-action_updater">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-action_updater" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="action_updater" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="action_updater.client.html" class="btn btn-neutral float-right" title="action_updater.client package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Vanessa Sochat.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
