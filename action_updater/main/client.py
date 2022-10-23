@@ -87,7 +87,7 @@ class ActionUpdater:
 
                 # The count reflects the last run
                 if updater.detect(action):
-                    self.c.print(f"[red]❌ {updater.title} Updater: {updater.count} updates[/red]")
+                    self.c.print(f"[red]✖️ {updater.title} Updater: {updater.count} updates[/red]")
                 else:
                     self.c.print(f"[green]✔ {updater.title}: No updates[/green]")
 
@@ -104,7 +104,7 @@ class ActionUpdater:
         actions = self.detect(paths, details=details, updaters=updaters)
         for path, action in actions.items():
             if action.has_changes:
-                self.c.print("[purple]❇ Writing updated {path}[/purple]")
+                self.c.print(f"[purple]❇ Writing updated {path}[/purple]")
                 action.write(path)
 
     def __repr__(self):

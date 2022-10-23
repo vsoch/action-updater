@@ -1,9 +1,9 @@
 # Action Updater
 
 [![PyPI version](https://badge.fury.io/py/action-updater.svg)](https://badge.fury.io/py/action-updater)
-[![GitHub actions status](https://github.com/vsoch/action-updater/workflows/main/badge.svg?branch=main)](https://github.com/vsoch/action-updater/actions?query=branch%3Amain+workflow%3Amain)
+[![main](https://github.com/vsoch/action-updater/actions/workflows/main.yml/badge.svg)](https://github.com/vsoch/action-updater/actions/workflows/main.yml)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-59-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 The actions updater will make it easy to update actions:
@@ -80,9 +80,13 @@ if you have old syntax or action versions.
 $ action-updater detect .github/workfows/main.yaml
 ```
 
-It will print to the terminal the updated file for preview.
+If a file has updates, it will print to the terminal the updated file for preview.
 
 ![docs/assets/img/detect.png](docs/assets/img/detect.png)
+
+And after you run `update` (described below) you will see all green!
+
+![docs/assets/img/clean.png](docs/assets/img/clean.png)
 
 You can also select to use one or more specific updaters (add multiple `-u` or `--updater`):
 
@@ -97,6 +101,10 @@ An update command performs a detect, but then writes changes to the file.
 ```bash
 $ action-updater update .github/workfows/main.yaml
 ```
+
+And you can run for all files in your `.github/workflows` directory!
+
+![docs/assets/img/updates.png](docs/assets/img/updates.png)
 
 For either of the `update` or `detect` commands, turn off details by
 adding the `--no-details` flag. Also for both, exporting a `GITHUB_TOKEN`
@@ -168,6 +176,14 @@ tool to generate a contributors graphic below.
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://vsoch.github.io"><img src="https://avatars.githubusercontent.com/u/814322?v=4?s=100" width="100px;" alt="Vanessasaurus"/><br /><sub><b>Vanessasaurus</b></sub></a><br /><a href="https://github.com/vsoch/action-updater/commits?author=vsoch" title="Code">💻</a></td>
+    </tr>
+  </tbody>
+</table>
+
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 
