@@ -2,15 +2,20 @@
 
 [![PyPI version](https://badge.fury.io/py/action-updater.svg)](https://badge.fury.io/py/action-updater)
 [![main](https://github.com/vsoch/action-updater/actions/workflows/main.yml/badge.svg)](https://github.com/vsoch/action-updater/actions/workflows/main.yml)
+
+![docs/assets/img/logo/action-updater-small.png](docs/assets/img/logo/action-updater-small.png)
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 
 The actions updater will make it easy to update actions:
 
  - 🥑 updated syntax and commands
  - 🥑 versions of actions, either for releases or commits
  - 🥑 preview, write to new file, or write in place!
+ - 🥑 run as a GitHub action workflow for annual checks!
 
 You can see the [⭐️ Documentation ⭐️](https://vsoch.github.io/action-updater) for complete details!
 

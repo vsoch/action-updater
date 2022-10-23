@@ -1,0 +1,34 @@
+name: GitHub Updater (Bi-annual)
+on:
+  schedule:
+    # 1st of every month (and action will check for specific months)
+    - cron: "0 0 1 * *"
+
+jobs:
+  test-detect:
+    name: Run GitHub Updater
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determine if Running
+        run: |
+           month=$(date '+%m')
+           # Run in October or April
+           if [[ "${month}" == "10" ]] || [[ "${month}" == "4" ]]; then
+               printf "We are in October or April, run.\n"
+               echo "do_run=true" >> $GITHUB_ENV
+           else
+               printf "We are NOT in October or April, no run.\n"
+               echo "do_run=false" >> $GITHUB_ENV
+           fi
+
+      - name: Checkout Repository
+        if: $(env.do_run == 'true')
+        uses: actions/checkout@v3
+      - name: Detect and Update
+        if: $(env.do_run == 'true')
+        uses: vsoch/github-updater@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: .github/workflows
+          # This is the default
+          pull_request: true

@@ -230,3 +230,159 @@ These (three separate) updaters will find each of deprecated ``set-output``, ``s
 These updaters do not have any arguments. The ``set-env`` directive was done earlier, and largely it shouldn't be in used anymore.
 These updaters do not have any custom settings, as the updates are fairly straight forward. One possible preference is to use printf instead of echo,
 but I didn't implement this yet as I think it's fairly trivial.
+
+
+Container
+=========
+
+If you don't want to install locally, we provide a `docker container <https://github.com/vsoch/action-updater/pkgs/container/action-updater>`_
+that you can use! As an example
+
+
+.. code-block:: console
+
+    $ docker run -it ghcr.io/vsoch/action-updater
+    # which action-updater
+
+And pulling via Singularity (so you don't change permissions, or can use on an HPC cluster)
+
+.. code-block:: console
+
+    $ singularity pull docker://ghcr.io/vsoch/action-updater
+    $ singularity exec action-updater_latest.sif action-updater detect .github/workflows/main.yml
+
+And that's it!
+
+
+
+GitHub Action
+=============
+
+I decided that I wanted to be able to run a detection and open up a pull request with suggested
+changes at least once a year (maybe twice?) and then use the main branch here so I could always
+be "subscribed" to new updates. Since cron doesn't have a "run once a year" setting, we need to hack
+this a bit! We can ask it to run once a month (on our day of choice) and then only proceed given
+that we hit a particular month (or set of months).
+
+Example
+-------
+
+Here is an example of running the GitHub Updater (to open a pull request, the default) once a year.
+This is supported by cron!
+
+.. code-block:: yaml
+
+    name: GitHub Updater (Yearly)
+    on:
+      schedule:
+        # 1st of June, so it's summer and you aren't busy, right?
+        - cron: "0 0 1 6 *"
+
+    jobs:
+      run-detect:
+        name: Run GitHub Updater
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout Repository
+            uses: actions/checkout@v3
+          - name: Detect and Update
+            uses: vsoch/github-updater@main
+            with:
+              token: ${{ secrets.GITHUB_TOKEN }}
+              path: .github/workflows
+              # This is the default
+              pull_request: true
+
+And here is an idea for a hack to make it run more than once a year (but not once a month) -
+basically just get the month and check if we match!
+
+.. code-block:: yaml
+
+    name: GitHub Updater (Bi-annual)
+    on:
+      schedule:
+        # 1st of every month (and action will check for specific months)
+        - cron: "0 0 1 * *"
+
+    jobs:
+      test-detect:
+        name: Run GitHub Updater
+        runs-on: ubuntu-latest
+        steps:
+          - name: Determine if Running
+            run: |
+               month=$(date '+%m')
+               # Run in October or April
+               if [[ "${month}" == "10" ]] || [[ "${month}" == "4" ]]; then
+                   printf "We are in October or April, run.\n"
+                   echo "do_run=true" >> $GITHUB_ENV
+               else
+                   printf "We are NOT in October or April, no run.\n"
+                   echo "do_run=false" >> $GITHUB_ENV
+               fi
+
+          - name: Checkout Repository
+            if: $(env.do_run == 'true')
+            uses: actions/checkout@v3
+          - name: Detect and Update
+            if: $(env.do_run == 'true')
+            uses: vsoch/github-updater@main
+            with:
+              token: ${{ secrets.GITHUB_TOKEN }}
+              path: .github/workflows
+              # This is the default
+              pull_request: true
+
+Both of these examples are provided in the `examples <https://github.com/vsoch/action-updater/tree/main/examples>`_ directory of the repository.
+
+Variables
+---------
+
+
+.. list-table:: GitHub Action Variables
+   :widths: 25 65 10
+   :header-rows: 1
+
+   * - Name
+     - Description
+     - Default
+     - Required
+   * - token
+     - GitHub token (e.g., ``secrets.GITHUB_TOKEN``)
+     - unset
+     - true (if opening pull request)
+   * - path
+     - path to a single yaml file or directory of yaml workflows
+     - .github/workflows
+     - true
+   * - settings_file
+     - optional settings file to replace default for action-updater
+     - unset
+     - false
+   * - pull_request
+     - Open a pull request with changes
+     - true
+     - false
+   * - updaters
+     - A comma separated list of updater names to limit to (e.g., version,setoutput)
+     - unset
+     - false
+   * - args
+     - optional args for either of ``detect`` (run when ``pull_request`` is false) or ``update`` (run when ``pull_request`` is true)
+     - unset
+     - false
+   * - version
+     - release of action updater to install (defaults to install from main)
+     - unset
+     - false
+   * - allow_fail
+     - If running with ``pull_request`` false, the action serves as a detection tool, and will fail on errors. Set this to true to not fail.
+     - false
+     - false
+   * - branch
+     - If running with ``pull_request`` true, open the pull request to this branch
+     - main
+     - false
+
+From the above, you can tell that by default we will run on your ``.github/workflows`` provided
+with the repository.

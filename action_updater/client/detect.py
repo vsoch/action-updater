@@ -4,7 +4,9 @@ __license__ = "MPL 2.0"
 
 from action_updater.main import get_client
 
+from .helpers import parse_updaters
+
 
 def main(args, parser, extra, subparser):
     cli = get_client(quiet=args.quiet)
-    cli.detect(paths=args.paths, details=not args.no_details, updaters=args.updaters)
+    cli.detect(paths=args.paths, details=not args.no_details, updaters=parse_updaters(args))

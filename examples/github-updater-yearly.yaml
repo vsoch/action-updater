@@ -1,0 +1,20 @@
+name: GitHub Updater (Yearly)
+on:
+  schedule:
+    # 1st of June, so it's summer and you aren't busy, right?
+    - cron: "0 0 1 6 *"
+
+jobs:
+  test-detect:
+    name: Run GitHub Updater
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Detect and Update
+        uses: vsoch/github-updater@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: .github/workflows
+          # This is the default
+          pull_request: true
