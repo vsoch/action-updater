@@ -38,7 +38,7 @@ runs:
         version: ${{ inputs.version }}
       run: |
         if [[ "${version}" == "" ]]; then
-            pip install action-updater
+            pip install git+https://github.com/vsoch/action-updater.git@main
         else
             pip install action-updater@${version}
         fi
