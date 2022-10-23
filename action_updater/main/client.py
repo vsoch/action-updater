@@ -41,9 +41,7 @@ class ActionUpdater:
             for name, updaterClass in self.finder.items():
 
                 # Instantiate an updater for the path, provide settings
-                self._updaters[name] = updaterClass(
-                    token=self.token, settings=self.settings
-                )
+                self._updaters[name] = updaterClass(token=self.token, settings=self.settings)
 
         return self._updaters
 
@@ -89,9 +87,7 @@ class ActionUpdater:
 
                 # The count reflects the last run
                 if updater.detect(action):
-                    self.c.print(
-                        f"[red]❌ {updater.title} Updater: {updater.count} updates[/red]"
-                    )
+                    self.c.print(f"[red]❌ {updater.title} Updater: {updater.count} updates[/red]")
                 else:
                     self.c.print(f"[green]✔ {updater.title}: No updates[/green]")
 

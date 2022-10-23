@@ -14,9 +14,7 @@ def sort_tags(tags):
     Sort a list of string tags, return sorted (first latest) with original version
     """
     # all letters excluded except for v
-    letters = "(%s)" % "|".join(
-        [x for x in string.ascii_letters if x not in ["v", "V"]]
-    )
+    letters = "(%s)" % "|".join([x for x in string.ascii_letters if x not in ["v", "V"]])
 
     # A pipeline to process docker tags
     steps = (

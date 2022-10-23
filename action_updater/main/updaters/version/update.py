@@ -87,9 +87,7 @@ class VersionUpdater(UpdaterBase):
                     # If we added a new comment, update the old one
                     if "#" in updated and "uses" in step.ca.items:
                         updated, comment = updated.split("#", 1)
-                        step.ca.items["uses"] = update_comment(
-                            step.ca.items["uses"], comment
-                        )
+                        step.ca.items["uses"] = update_comment(step.ca.items["uses"], comment)
                     step["uses"] = updated.strip()
                     self.count += 1
         return True

@@ -16,4 +16,3 @@ The versions coincide with releases on pip. Only major versions will be released
 ## [0.0.x](https://github.com/rse-ops/actions-updater/tree/main) (0.0.x)
  - adding set-output and set-state updaters (0.0.1)
  - Project skeleton release (0.0.0)
-

@@ -15,7 +15,7 @@ from action_updater.logger import logger
 
 try:
     from ruamel_yaml import YAML
-except:
+except ImportError:
     from ruamel.yaml import YAML
 
 

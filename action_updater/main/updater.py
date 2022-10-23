@@ -62,9 +62,7 @@ class UpdaterFinder(Mapping):
 
             # Continue if the file doesn't exist
             if not os.path.exists(updater_file):
-                logger.debug(
-                    "%s does not appear to have an update.py, skipping." % updater_dir
-                )
+                logger.debug("%s does not appear to have an update.py, skipping." % updater_dir)
                 continue
 
             # The class name means we split by underscore, capitalize, and join
@@ -163,7 +161,7 @@ class UpdaterBase:
 
         try:
             response.raise_for_status()
-        except:
+        except Exception:
             # Set a warning about limtis without tokens!
             if not self.token:
                 logger.exit("export GITHUB_TOKEN to increase API limits.")

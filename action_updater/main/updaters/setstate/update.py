@@ -17,7 +17,7 @@ class SetstateUpdater(UpdaterBase):
         """
         # Set the count to 0
         self.count = 0
-        updated = False 
+        updated = False
 
         # No point if we don't have jobs!
         if not action.jobs:

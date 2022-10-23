@@ -13,6 +13,4 @@ reps = {"$install_dir": install_dir, "$root_dir": os.path.dirname(install_dir)}
 default_settings_file = os.path.join(reps["$install_dir"], "settings.yml")
 
 # The user settings file can be created to over-ride default
-user_settings_file = os.path.join(
-    os.path.expanduser("~/.action-updater"), "settings.yml"
-)
+user_settings_file = os.path.join(os.path.expanduser("~/.action-updater"), "settings.yml")

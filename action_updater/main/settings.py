@@ -12,7 +12,7 @@ from action_updater.logger import logger
 
 try:
     from ruamel_yaml.comments import CommentedSeq
-except:
+except ImportError:
     from ruamel.yaml.comments import CommentedSeq
 
 import os
@@ -22,11 +22,11 @@ from datetime import datetime
 import jsonschema
 
 
-def OrderedList(*l):
+def OrderedList(*listing):
     """
     Preserve ordering when saved to yaml
     """
-    ret = CommentedSeq(l)
+    ret = CommentedSeq(listing)
     ret.fa.set_flow_style()
     return ret
 
@@ -62,8 +62,7 @@ class SettingsBase:
             os.makedirs(user_home)
         if os.path.exists(defaults.user_settings_file):
             logger.exit(
-                "%s already exists! Remove first before re-creating."
-                % defaults.user_settings_file
+                "%s already exists! Remove first before re-creating." % defaults.user_settings_file
             )
         shutil.copyfile(self.settings_file, defaults.user_settings_file)
         logger.info("Created user settings file %s" % defaults.user_settings_file)
@@ -254,9 +253,7 @@ class SettingsBase:
         try:
             self.validate()
         except jsonschema.exceptions.ValidationError as error:
-            logger.exit(
-                "%s:%s cannot be added to config: %s" % (key, value, error.message)
-            )
+            logger.exit("%s:%s cannot be added to config: %s" % (key, value, error.message))
 
     @property
     def filesystem_registry(self):
@@ -354,17 +351,12 @@ class SettingsBase:
             elif len(param) == 2:
                 key, value = param
             elif len(param) != 2:
-                logger.exit(
-                    f"When providing a list, it must be a [key, value]. Found {param}"
-                )
+                logger.exit(f"When providing a list, it must be a [key, value]. Found {param}")
 
         # With a string, assume splittling by :
         if isinstance(param, str):
             if ":" not in param:
-                logger.exit(
-                    "Param %s is missing a :, should be key:value pair. Skipping."
-                    % param
-                )
+                logger.exit("Param %s is missing a :, should be key:value pair. Skipping." % param)
             key, value = param.rsplit(":", 1)
 
         if command == "set":

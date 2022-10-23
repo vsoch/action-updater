@@ -23,7 +23,7 @@ def update_lines(lines, key="set-output", envar="$GITHUB_OUTPUT"):
         # Convert:
         # echo "::set-output name={name}}::${raw_data[4]}"
         # echo "name=value" >> $GITHUB_OUTPUT
-        match = re.search("%s(\s)+name=(?P<name>.+)::(?P<value>.+)" % key, line)
+        match = re.search("%s(\s)+name=(?P<name>.+)::(?P<value>.+)" % key, line)  # noqa
         if not match:
             updated.append(line)
             continue
