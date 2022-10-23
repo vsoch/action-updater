@@ -1,0 +1,22 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - master
+  release:
+    types: [published,edited]
+
+jobs:
+  build-ui:
+    name: Build and deploy service
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set env to staging
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
+        run: |
+          echo "::set-env name=ENV::stg"
+          echo "::set-env name=GKE_CLUSTER::cluster-stg"
+          echo "::set-env name=GKE_ZONE_OR_REGION::pizza"

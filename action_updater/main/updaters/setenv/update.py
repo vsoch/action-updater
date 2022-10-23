@@ -6,22 +6,21 @@ from action_updater.main.updater import UpdaterBase
 from action_updater.main.updaters.setoutput.update import update_lines
 
 
-class SetstateUpdater(UpdaterBase):
+class SetenvUpdater(UpdaterBase):
 
-    name = "set-state"
-    description = "update deprecated set-state commands"
+    name = "set-env"
+    description = "update deprecated set-env commands"
 
     def detect(self, action):
         """
-        Detect changes in an action, old set-state.
+        Detect changes in an action, old set-env.
         """
         # Set the count to 0
         self.count = 0
-        updated = False
 
         # No point if we don't have jobs!
         if not action.jobs:
-            return
+            return False
 
         # For each job, look for steps->updater versions
         for _, job in action.jobs.items():
@@ -32,8 +31,11 @@ class SetstateUpdater(UpdaterBase):
                     continue
 
                 # Update step run lines
-                updated_lines = update_lines(step["run"], "set-state", "$GITHUB_STATE")
-                updated = updated or (updated_lines != step["run"])
+                updated_lines = update_lines(step["run"], "set-env", "$GITHUB_ENV")
+
+                # Keep track of change counts
+                if updated_lines != step["run"]:
+                    self.count += 1
                 step["run"] = updated_lines
 
-        return updated
+        return self.count != 0

@@ -39,16 +39,26 @@ class GitHubAction:
         """
         Determine if before != after (the action has changed)
         """
-        before = utils.get_yaml_string(self.cfg).splitlines(keepends=True)
-        after = utils.get_yaml_string(self.changes).splitlines(keepends=True)
-        return before != after
+        return self.render_before() != self.render_after()
 
-    def diff(self):
+    def render_after(self):
+        """
+        Render the action post-detect (with changes).
+        """
+        return utils.get_yaml_string(self.changes).splitlines(keepends=True)
+
+    def render_before(self):
+        """
+        Render the action pre-detect (without changes).
+        """
+        return utils.get_yaml_string(self.cfg).splitlines(keepends=True)
+
+    def diff(self, code_theme="vim"):
         """
         Show diff between original (cfg) and changed!
         """
-        before = utils.get_yaml_string(self.cfg).splitlines(keepends=True)
-        after = utils.get_yaml_string(self.changes).splitlines(keepends=True)
+        before = self.render_before()
+        after = self.render_after()
 
         if before == after:
             print()
@@ -66,5 +76,5 @@ class GitHubAction:
         )
 
         c = Console()
-        md = Markdown(f"""\n```diff\n{diff}\n```\n""", code_theme="vim")
+        md = Markdown(f"""\n```diff\n{diff}\n```\n""", code_theme=code_theme)
         c.print(md)

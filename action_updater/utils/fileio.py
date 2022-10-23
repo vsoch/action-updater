@@ -138,7 +138,8 @@ def write_yaml(obj, filename):
     """
     yaml = YAML()
     yaml.preserve_quotes = True
-
+    # Could be used to customize spacing, if desired
+    # yaml.indent(sequence=4, offset=2)
     with open(filename, "w") as fd:
         yaml.dump(obj, fd)
 

@@ -111,8 +111,8 @@ class UpdaterBase:
         """
         If settings are provided (and the updater has a schema) ensure we validate.
         """
-        self._settings = settings or {}
-        if self._settings and self.schema:
+        self.global_settings = settings or {}
+        if self.global_settings and self.schema:
             jsonschema.validate(self.settings, schema=self.schema)
 
     @property
@@ -120,7 +120,7 @@ class UpdaterBase:
         """
         Get settings specific to updater
         """
-        return self._settings.updaters.get(self.name, {})
+        return self.global_settings.updaters.get(self.name, {})
 
     def update_token(self, token=None):
         """
@@ -138,20 +138,24 @@ class UpdaterBase:
         """
         Get the lateset release of an action (under flux-framework)
         """
-        return self.get_request(f"https://api.github.com/repos/{repo}/releases")
+        return self.get_request(f"{self.global_settings.github_api}/repos/{repo}/releases")
 
     def get_tags(self, repo):
         """
         Get the lateset tags for a repository
         """
-        return self.get_request(f"https://api.github.com/repos/{repo}/git/refs/tags")
+        return self.get_request(f"{self.global_settings.github_api}/repos/{repo}/git/refs/tags")
 
     def get_tags_lookup(self, repo):
-        return {
-            re.sub("refs/tags/", "", t["ref"]): t
-            for t in self.get_tags(repo)
-            if "refs/tags" in t["ref"]
-        }
+        """
+        This isn't required to be sploot out, but it's easier to debug / read if necessary
+        """
+        tags = {}
+        for t in self.get_tags(repo):
+            if "ref" not in t or "refs/tags" not in t["ref"]:
+                continue
+            tags[re.sub("refs/tags/", "", t["ref"])] = t
+        return tags
 
     def get_request(self, url):
         """

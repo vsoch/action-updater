@@ -27,3 +27,10 @@ jobs:
         source activate black
         pip install -r .github/dev-requirements.txt
         pre-commit run --all-files
+
+    - name: Run Tests
+      run: |
+        export PATH="/usr/share/miniconda/bin:$PATH"
+        source activate black
+        pip install -e .
+        pytest action_updater/test*.py
