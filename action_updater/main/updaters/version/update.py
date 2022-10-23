@@ -73,6 +73,7 @@ class VersionUpdater(UpdaterBase):
                     # If we added a new comment, update the old one
                     if "#" in updated:
                         updated, comment = updated.split("#", 1)
+                        comment = comment.strip()
                         step["uses"] = updated.strip()
                         step.ca.items["uses"] = [None, None, None, None]
                         step.yaml_add_eol_comment(f"# {comment}\n", "uses", column=0)
