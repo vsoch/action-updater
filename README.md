@@ -137,7 +137,7 @@ in the environment. You can read about [the deprecation here](https://github.blo
 To lint your code, you can install pre-commit:
 
 ```bash
-$ pip install pre-commit
+$ pip install -r .github/dev-requirements.txt
 ```
 
 And run:
