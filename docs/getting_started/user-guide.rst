@@ -258,16 +258,18 @@ And that's it!
 GitHub Action
 =============
 
-I decided that I wanted to be able to run a detection and open up a pull request with suggested
-changes at least once a year (maybe twice?) and then use the main branch here so I could always
+I decided that I wanted to be able to run a detection to alert me to needing changes
+at least once a year (maybe twice?) and then use the main branch here so I could always
 be "subscribed" to new updates. Since cron doesn't have a "run once a year" setting, we need to hack
 this a bit! We can ask it to run once a month (on our day of choice) and then only proceed given
-that we hit a particular month (or set of months).
+that we hit a particular month (or set of months). Note that since a GitHub bot (action) is not
+allowed to write to any workflow file, we can't open a pull request with changes - we can only
+run and alert you to run the command locally!
 
 Example
 -------
 
-Here is an example of running the GitHub Updater (to open a pull request, the default) once a year.
+Here is an example of running the GitHub Updater to run a detection once a year.
 This is supported by cron!
 
 .. code-block:: yaml
@@ -289,9 +291,8 @@ This is supported by cron!
             uses: vsoch/github-updater@main
             with:
               token: ${{ secrets.GITHUB_TOKEN }}
-              path: .github/workflows
               # This is the default
-              pull_request: true
+              path: .github/workflows
 
 And here is an idea for a hack to make it run more than once a year (but not once a month) -
 basically just get the month and check if we match!
@@ -329,9 +330,6 @@ basically just get the month and check if we match!
             uses: vsoch/github-updater@main
             with:
               token: ${{ secrets.GITHUB_TOKEN }}
-              path: .github/workflows
-              # This is the default
-              pull_request: true
 
 Both of these examples are provided in the `examples <https://github.com/vsoch/action-updater/tree/main/examples>`_ directory of the repository.
 
@@ -359,10 +357,6 @@ Variables
      - optional settings file to replace default for action-updater
      - unset
      - false
-   * - pull_request
-     - Open a pull request with changes
-     - true
-     - false
    * - updaters
      - A comma separated list of updater names to limit to (e.g., version,setoutput)
      - unset
@@ -378,10 +372,6 @@ Variables
    * - allow_fail
      - If running with ``pull_request`` false, the action serves as a detection tool, and will fail on errors. Set this to true to not fail.
      - false
-     - false
-   * - branch
-     - If running with ``pull_request`` true, open the pull request to this branch
-     - main
      - false
 
 From the above, you can tell that by default we will run on your ``.github/workflows`` provided

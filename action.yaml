@@ -22,13 +22,6 @@ inputs:
   allow_fail:
     description: allow a failure (only relevant if pull_request is false)
     default: false
-  pull_request:
-    description: open a pull request to update changes (otherwise runs detect only)
-    default: true
-  branch:
-    description: branch to open pull request to
-    required: false
-    default: main
 
 runs:
   using: "composite"
@@ -47,7 +40,6 @@ runs:
     - name: Detect Action Updates
       env:
         path: ${{ inputs.path }}
-        pull_request: ${{ inputs.pull_request }}
         settings_file: ${{ inputs.settings_file }}
         args: ${{ inputs.args }}
         updaters: ${{ inputs.updaters }}
@@ -62,12 +54,7 @@ runs:
         if [[ "${settings_file}" != "" ]]; then
             cmd="$cmd --settings-file ${settings_file}"
         fi
-        # If we aren't do a PR, detect only. Otherwise, update
-        if [[ "${pull_request}" == "true" ]]; then
-            cmd="${cmd} update"
-        else
-            cmd="${cmd} detect"
-        fi
+        cmd="${cmd} detect"
         if [[ "${updaters}" != "" ]]; then
             cmd="${cmd} --updaters ${updaters}"
         fi
@@ -87,45 +74,9 @@ runs:
         if [[ "${retval}" != "0" ]] && [[ "${allow_fail}" == "false" ]]; then
             printf "Detect found changes, and allow_fail is false."
             exit 1
+        elif [[ "${retval}" != "0" ]] && [[ "${allow_fail}" == "true" ]]; then
+            printf "Detect found changes, and allow_fail is true."
+            exit 0
         fi
+        printf "Return value is ${retval}, no changes needed!\n"
       shell: bash
-
-    - name: Commit latest release version
-      if: (inputs.pull_request == 'true')
-      env:
-        path: ${{ env.path }}
-        GITHUB_TOKEN: ${{ inputs.token }}
-      run: |
-        # GitHub Token is required
-        if [[ "${GITHUB_TOKEN}" == "" ]]; then
-           printf "The 'token' is required to open a pull request\n"
-           exit 1
-        fi
-        today=$(date '+%Y-%m-%d')
-        export BRANCH_FROM="action-updater-${today}"
-        git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-        git branch
-        git checkout -b "${BRANCH_FROM}" || git checkout "${BRANCH_FROM}"
-        git branch
-        git config --global user.name "github-actions"
-        git config --global user.email "github-actions@users.noreply.github.com"
-        git config --global pull.rebase true
-        git add ${path}/* || git add ${path}
-        if git diff-index --quiet HEAD --; then
-            printf "No changes\n"
-            echo "has_changes=false" >> $GITHUB_ENV
-        else
-            printf "Changes\n"
-            git commit -a -m "Automated deployment to update GitHub Action workflows ${today}" -m "Signed-off-by: github-actions <github-actions@users.noreply.github.com>"
-            git push origin "${BRANCH_FROM}"
-            echo "has_changes=true" >> $GITHUB_ENV
-        fi
-        echo "PULL_REQUEST_FROM_BRANCH=${BRANCH_FROM}" >> $GITHUB_ENV
-      shell: bash
-
-    - name: Open Pull Request
-      if: (env.has_changes == 'true' && inputs.pull_request == 'true')
-      uses: vsoch/pull-request-action@1.0.21
-      env:
-        GITHUB_TOKEN: ${{ inputs.token }}
-        PULL_REQUEST_BRANCH: ${{ inputs.branch }}

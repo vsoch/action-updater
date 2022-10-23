@@ -15,12 +15,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: action_updater/tests/data/set-env-before.yaml
           allow_fail: true
-          pull_request: false
       - name: Test Scoped List
         uses: ./
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: action_updater/tests/data/set-env-before.yaml
           allow_fail: true
-          pull_request: false
           updaters: "setoutput,savestate"
