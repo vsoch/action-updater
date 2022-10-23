@@ -1,5 +1,8 @@
 name: "action-updater"
 description: "Check for updates to your actions"
+branding:
+  icon: 'activity'
+  color: 'green'
 inputs:
   token:
     description: GitHub token
