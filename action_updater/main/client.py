@@ -87,7 +87,7 @@ class ActionUpdater:
 
                 # The count reflects the last run
                 if updater.detect(action):
-                    self.c.print(f"[red]❌ {updater.title} Updater: {updater.count} updates[/red]")
+                    self.c.print(f"[red]✖️ {updater.title} Updater: {updater.count} updates[/red]")
                 else:
                     self.c.print(f"[green]✔ {updater.title}: No updates[/green]")
 

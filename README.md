@@ -80,9 +80,13 @@ if you have old syntax or action versions.
 $ action-updater detect .github/workfows/main.yaml
 ```
 
-It will print to the terminal the updated file for preview.
+If a file has updates, it will print to the terminal the updated file for preview.
 
 ![docs/assets/img/detect.png](docs/assets/img/detect.png)
+
+And after you run `update` (described below) you will see all green!
+
+![docs/assets/img/clean.png](docs/assets/img/clean.png)
 
 You can also select to use one or more specific updaters (add multiple `-u` or `--updater`):
 
