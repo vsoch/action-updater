@@ -62,11 +62,11 @@ runs:
         printf "${cmd}\n"
         $cmd
         retval=$?
+        echo "Return value is ${retval}"
         echo "retval=${retval}" >> $GITHUB_ENV
       shell: bash
 
     - name: Exit on failure (updates)
-      if: (inputs.pull_request == 'false')
       env:
         allow_fail: ${{ inputs.allow_fail }}
         retval: ${{ env.retval }}
