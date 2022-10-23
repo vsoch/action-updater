@@ -3,8 +3,9 @@ __copyright__ = "Copyright 2022, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 
-from action_updater.logger import logger
 import action_updater.utils as utils
+from action_updater.logger import logger
+
 from .settings import Settings
 
 

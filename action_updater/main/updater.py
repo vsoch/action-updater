@@ -3,18 +3,17 @@ __copyright__ = "Copyright 2022, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 
+import abc
+import importlib
+import inspect
+import os
+import re
 from collections.abc import Mapping
 
 import jsonschema
-from action_updater.logger import logger
-
-import importlib
-
 import requests
-import inspect
-import abc
-import os
-import re
+
+from action_updater.logger import logger
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -91,15 +90,20 @@ class UpdaterBase:
         self.headers = {}
         self.update_token(token)
         self.count = 0
-        self.validate_settings(settings)
 
         # Each updater can ship its own settings schema
         if not hasattr(self, "schema"):
             self.schema = {}
 
+        self.validate_settings(settings)
+
     @abc.abstractmethod
     def detect(self, *args, **kwargs):
         pass
+
+    @property
+    def slug(self):
+        return re.sub("(-|_)", "", self.name)
 
     @property
     def title(self):

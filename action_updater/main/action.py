@@ -3,11 +3,13 @@ __copyright__ = "Copyright 2022, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 
-import action_updater.utils as utils
-import difflib
-from rich.markdown import Markdown
-from rich.console import Console
 import copy
+import difflib
+
+from rich.console import Console
+from rich.markdown import Markdown
+
+import action_updater.utils as utils
 
 
 class GitHubAction:

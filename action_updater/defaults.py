@@ -3,6 +3,7 @@ __copyright__ = "Copyright 2022, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 import os
+
 import action_updater.utils as utils
 
 install_dir = utils.get_installdir()

@@ -6,8 +6,130 @@ import inspect
 import logging as _logging
 import os
 import platform
+import random
 import sys
 import threading
+
+import rich.console
+import rich.table
+
+
+class Table:
+    """
+    Format a list of dicts into a table
+    """
+
+    def __init__(self, items):
+        self.data = items
+        self.max_widths = {}
+        self.ensure_complete()
+
+    def available_width(self, columns):
+        """
+        Calculate available width based on fields we cannot truncate (urls)
+        """
+        # We will determine column width based on terminal size
+        try:
+            width = os.get_terminal_size().columns
+        except OSError:
+            width = 120
+
+        # Calculate column width
+        column_width = int(width / len(columns))
+        updated = width
+
+        for _, needed in self.max_widths.items():
+            updated = updated - needed
+
+        # We don't have enough space
+        if updated < 0:
+            logger.warning("Terminal is too small to correctly render!")
+            return column_width
+
+        # Otherwise, recalculate column width taking into account truncation
+        # We use the updated smaller width, and break it up between columns
+        # that don't have a max width
+        return int(updated / (len(columns) - len(self.max_widths)))
+
+    def ensure_complete(self):
+        """
+        If any data missing fields, ensure they are included
+        """
+        fields = set()
+        for entry in self.data:
+            [fields.add(x) for x in entry.keys()]
+
+        # Ensure fields are present
+        for entry in self.data:
+            for field in fields:
+
+                if field not in entry:
+                    entry[field] = ""
+
+    @property
+    def color(self):
+        """
+        Return a random color
+        """
+        return "color(" + str(random.choice(range(255))) + ")"
+
+    def table_columns(self):
+        """
+        Shared function to return consistent table columns
+        """
+        if not self.data:
+            return []
+        return list(self.data[0].keys())
+
+    def table_rows(self, columns, limit=25):
+        """
+        Shared function to yield rows as a list
+        """
+        # All keys are lowercase
+        column_width = self.available_width(columns)
+
+        for i, row in enumerate(self.data):
+
+            # have we gone over the limit?
+            if limit and i > limit:
+                return
+
+            parsed = []
+            for column in columns:
+                content = row[column]
+                if (
+                    content
+                    and len(content) > column_width
+                    and column not in self.endpoint.truncate_list
+                ):
+                    content = content[:column_width] + "..."
+                parsed.append(content)
+            yield parsed
+
+    def show(self, limit=25, title=None):
+        """
+        Pretty print a table of content
+        """
+        table = rich.table.Table(title=title)
+
+        # Always skip these columns
+        seen_colors = []
+
+        # Get column titles
+        columns = self.table_columns()
+        for column in columns:
+            color = None
+            while not color or color in seen_colors:
+                color = self.color
+            table.add_column(column.capitalize(), style=color)
+
+        # Add rows
+        for row in self.table_rows(columns, limit=limit):
+            table.add_row(*row)
+
+        # And print!
+        console = rich.console.Console()
+        console.print(table, justify="left")
 
 
 class LogColors:

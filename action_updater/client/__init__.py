@@ -69,6 +69,7 @@ action-updater -c rm:listkey:value""",
 
     # print version and exit
     subparsers.add_parser("version", description="show software version")
+    subparsers.add_parser("list-updaters", description="list updaters available")
 
     # Detect changes for a directory or file of interest
     detect = subparsers.add_parser(
@@ -86,6 +87,13 @@ action-updater -c rm:listkey:value""",
         command.add_argument(
             "paths",
             help="path to run detect over (e.g., yaml file or GitHub actions folder)",
+            action="append",
+        )
+        command.add_argument(
+            "-u",
+            "--updater",
+            dest="updaters",
+            help="update using one or more specific updaters",
             action="append",
         )
         command.add_argument(
@@ -181,6 +189,8 @@ def run_action_updater():
         from .config import main
     elif args.command == "update":
         from .update import main
+    elif args.command == "list-updaters":
+        from .listing import list_updaters as main
 
     # Pass on to the correct parser
     return_code = 0

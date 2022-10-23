@@ -14,8 +14,4 @@ from .fileio import (
     write_json,
     write_yaml,
 )
-from .terminal import (
-    confirm_action,
-    get_installdir,
-    run_command,
-)
+from .terminal import confirm_action, get_installdir, run_command

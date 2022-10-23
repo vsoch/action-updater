@@ -2,11 +2,8 @@ __author__ = "Vanessa Sochat"
 __copyright__ = "Copyright 2022, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
+from action_updater.main.github import sort_major, sort_tags
 from action_updater.main.updater import UpdaterBase
-from action_updater.logger import logger
-from action_updater.main.github import sort_tags, sort_major
-import re
-
 
 schema = {
     "type": "object",

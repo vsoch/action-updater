@@ -7,4 +7,4 @@ from action_updater.main import get_client
 
 def main(args, parser, extra, subparser):
     cli = get_client(quiet=args.quiet)
-    cli.update(paths=args.paths, details=not args.no_details)
+    cli.update(paths=args.paths, details=not args.no_details, updaters=args.updaters)

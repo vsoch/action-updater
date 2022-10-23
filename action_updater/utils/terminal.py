@@ -6,8 +6,6 @@ __license__ = "MPL 2.0"
 import os
 from subprocess import PIPE, STDOUT, Popen
 
-from action_updater.logger import logger
-
 
 def get_installdir():
     """

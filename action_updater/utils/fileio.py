@@ -3,8 +3,8 @@ __copyright__ = "Copyright 2022, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 import errno
-import json
 import io
+import json
 import os
 import re
 import shutil

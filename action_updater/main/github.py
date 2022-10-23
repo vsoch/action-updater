@@ -3,12 +3,10 @@ __copyright__ = "Copyright 2022, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 
-import pipelib.steps as step
-import pipelib.pipeline as pipeline
-
-# Pre-generated sets of steps we can use
-import pipelib.pipelines as pipelines
 import string
+
+import pipelib.pipeline as pipeline
+import pipelib.steps as step
 
 
 def sort_tags(tags):
