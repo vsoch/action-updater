@@ -50,6 +50,10 @@ class GitHubAction:
         before = utils.get_yaml_string(self.cfg).splitlines(keepends=True)
         after = utils.get_yaml_string(self.changes).splitlines(keepends=True)
 
+        if before == after:
+            print()
+            return
+
         diff = "".join(
             list(
                 difflib.unified_diff(
