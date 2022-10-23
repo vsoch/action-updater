@@ -1,7 +1,7 @@
 # Action Updater
 
 [![PyPI version](https://badge.fury.io/py/action-updater.svg)](https://badge.fury.io/py/action-updater)
-[![GitHub actions status](https://github.com/vsoch/action-updater/workflows/main/badge.svg?branch=main)](https://github.com/vsoch/action-updater/actions?query=branch%3Amain+workflow%3Amain)
+[![main](https://github.com/vsoch/action-updater/actions/workflows/main.yml/badge.svg)](https://github.com/vsoch/action-updater/actions/workflows/main.yml)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-59-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
