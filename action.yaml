@@ -1,0 +1,82 @@
+name: "action-updater"
+description: "Check for updates to your actions"
+inputs:
+  token:
+    description: GitHub token
+    required: false
+  updaters:
+    description: Choose named updaters to run (comma separated value, no spaces)
+    required: false
+  path:
+    description: path to file or directory to check
+    default: .github/workflows
+  settings_file:
+    description: custom settings file for updater
+    required: false
+  args:
+    description: additional args to provide to 'detect' or 'update' commands
+    required: false
+  version:
+    description: release of updater to use
+    required: false
+  allow_fail:
+    description: allow a failure (only relevant if pull_request is false)
+    default: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install Action Updater
+      env:
+        version: ${{ inputs.version }}
+      run: |
+        if [[ "${version}" == "" ]]; then
+            pip install git+https://github.com/vsoch/action-updater.git@main
+        else
+            pip install action-updater@${version}
+        fi
+      shell: bash
+
+    - name: Detect Action Updates
+      env:
+        path: ${{ inputs.path }}
+        settings_file: ${{ inputs.settings_file }}
+        args: ${{ inputs.args }}
+        updaters: ${{ inputs.updaters }}
+        GITHUB_TOKEN: ${{ inputs.token }}
+      run: |
+        # If pwd is provided, ensure we get the entire path
+        if [[ "${path}" == "." ]]; then
+            path=$(pwd)
+            echo "path=${path}" >> ${GITHUB_ENV}
+        fi
+        cmd="action-updater"
+        if [[ "${settings_file}" != "" ]]; then
+            cmd="$cmd --settings-file ${settings_file}"
+        fi
+        cmd="${cmd} detect"
+        if [[ "${updaters}" != "" ]]; then
+            cmd="${cmd} --updaters ${updaters}"
+        fi
+        cmd="${cmd} ${path} ${args}"
+        printf "${cmd}\n"
+        $cmd
+        retval=$?
+        echo "Return value is ${retval}"
+        echo "retval=${retval}" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Exit on failure (updates)
+      env:
+        allow_fail: ${{ inputs.allow_fail }}
+        retval: ${{ env.retval }}
+      run: |
+        if [[ "${retval}" != "0" ]] && [[ "${allow_fail}" == "false" ]]; then
+            printf "Detect found changes, and allow_fail is false."
+            exit 1
+        elif [[ "${retval}" != "0" ]] && [[ "${allow_fail}" == "true" ]]; then
+            printf "Detect found changes, and allow_fail is true."
+            exit 0
+        fi
+        printf "Return value is ${retval}, no changes needed!\n"
+      shell: bash

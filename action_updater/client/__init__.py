@@ -97,6 +97,11 @@ action-updater -c rm:listkey:value""",
             action="append",
         )
         command.add_argument(
+            "--updaters",
+            dest="updater_list",
+            help="provide a comma separated value list of updater (e.g., version,setoutput)",
+        )
+        command.add_argument(
             "--no-details",
             dest="no_details",
             help="do not show details for file changes",

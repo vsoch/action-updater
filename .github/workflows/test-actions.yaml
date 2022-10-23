@@ -1,0 +1,24 @@
+name: Test Actions
+on:
+  pull_request: []
+
+jobs:
+  test-detect:
+    name: Test Detect
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Allow failure
+        uses: ./
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: action_updater/tests/data/set-env-before.yaml
+          allow_fail: true
+      - name: Test Scoped List
+        uses: ./
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: action_updater/tests/data/set-env-before.yaml
+          allow_fail: true
+          updaters: "setoutput,savestate"

@@ -24,6 +24,9 @@ class ActionUpdater:
         self.quiet = quiet
         self.c = Console()
 
+        # If using for a GitHub action, a global flag that indicates changes
+        self.has_changes = False
+
         # If we don't have default settings, load
         if not hasattr(self, "settings"):
             self.settings = Settings(settings_file)
@@ -88,6 +91,7 @@ class ActionUpdater:
                 # The count reflects the last run
                 if updater.detect(action):
                     self.c.print(f"[red]✖️ {updater.title} Updater: {updater.count} updates[/red]")
+                    self.has_changes = True
                 else:
                     self.c.print(f"[green]✔ {updater.title}: No updates[/green]")
 
