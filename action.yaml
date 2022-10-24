@@ -63,9 +63,7 @@ runs:
         fi
         cmd="${cmd} ${path} ${args}"
         printf "${cmd}\n"
-        $cmd
-        retval=$?
-        echo "Return value is ${retval}"
+        $cmd && retval=0 || retval=1
         echo "retval=${retval}" >> $GITHUB_ENV
       shell: bash
 
