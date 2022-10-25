@@ -14,6 +14,7 @@ and **Merged pull requests**. Critical items to know are:
 The versions coincide with releases on pip. Only major versions will be released as tags on Github.
 
 ## [0.0.x](https://github.com/rse-ops/actions-updater/tree/main) (0.0.x)
+ - enforce fallback to use major versions still enforces commit (0.0.13)
  - bug fix to version updater (0.0.12)
  - adding tests for updaters, docs, container (0.0.11)
  - adding set-output and set-state updaters (0.0.1)
