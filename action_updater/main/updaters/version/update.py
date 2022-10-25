@@ -65,6 +65,11 @@ class VersionUpdater(UpdaterBase):
                 if not updated:
                     updated = self.get_tagged_commit(tags)
 
+                    # If not updated here, first try to get major tags
+                    if not updated:
+                        updated = self.get_major_tag(tags)
+
+                # If we don't have tags by this point, no go - we cannot parse
                 if not updated:
                     continue
                 updated = f"{repo}@{updated}"
