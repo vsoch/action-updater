@@ -10,6 +10,10 @@ from .helpers import parse_updaters
 
 def main(args, parser, extra, subparser):
     cli = get_client(quiet=args.quiet)
+
+    # Update config settings on the fly
+    cli.settings.update_params(args.config_params)
+
     cli.detect(paths=args.paths, details=not args.no_details, updaters=parse_updaters(args))
     if cli.has_changes:
         logger.exit("Found changes, exiting with non-zero code.")

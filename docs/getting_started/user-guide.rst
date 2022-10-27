@@ -92,6 +92,9 @@ The following "global" settings (not specific to an updater) are defined!
    * - code_theme
      - Code theme to use for diff (from `Pygments <https://pygments.org/docs/styles/#builtin-styles>`_)
      - vim
+   * - line_length
+     - Line length to save to (default to ruamel default)
+     - unset
    * - updaters
      - Nested schemas for validators, discussed alongside updaters in this user guide.
      - (updater defaults or unset)

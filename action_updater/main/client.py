@@ -109,7 +109,7 @@ class ActionUpdater:
         for path, action in actions.items():
             if action.has_changes:
                 self.c.print(f"[purple]❇ Writing updated {path}[/purple]")
-                action.write(path)
+                action.write(path, line_length=self.settings.line_length)
 
     def __repr__(self):
         return str(self)
