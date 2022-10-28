@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>action_updater.utils.fileio &mdash; Action Updater 0.0.13 documentation</title>
+  <title>action_updater.utils.fileio &mdash; Action Updater 0.0.14 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/sphinx-argparse.css" type="text/css" />
@@ -31,7 +31,7 @@
             <a href="../../../index.html" class="icon icon-home"> Action Updater
           </a>
               <div class="version">
-                0.0.13
+                0.0.14
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -96,6 +96,8 @@
     <span class="kn">from</span> <span class="nn">ruamel_yaml</span> <span class="kn">import</span> <span class="n">YAML</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">ruamel.yaml</span> <span class="kn">import</span> <span class="n">YAML</span>
+
+<span class="kn">from</span> <span class="nn">.custom_yaml</span> <span class="kn">import</span> <span class="n">WrapperTransformer</span>
 
 
 <div class="viewcode-block" id="mkdirp"><a class="viewcode-back" href="../../../source/action_updater.utils.html#action_updater.utils.fileio.mkdirp">[docs]</a><span class="k">def</span> <span class="nf">mkdirp</span><span class="p">(</span><span class="n">dirnames</span><span class="p">):</span>
@@ -211,16 +213,19 @@
     <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json_obj</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot;: &quot;</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="write_yaml"><a class="viewcode-back" href="../../../source/action_updater.utils.html#action_updater.utils.fileio.write_yaml">[docs]</a><span class="k">def</span> <span class="nf">write_yaml</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<div class="viewcode-block" id="write_yaml"><a class="viewcode-back" href="../../../source/action_updater.utils.html#action_updater.utils.fileio.write_yaml">[docs]</a><span class="k">def</span> <span class="nf">write_yaml</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">line_length</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Save yaml to file, also preserving comments.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">yaml</span> <span class="o">=</span> <span class="n">YAML</span><span class="p">()</span>
     <span class="n">yaml</span><span class="o">.</span><span class="n">preserve_quotes</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="c1"># Could be used to customize spacing, if desired</span>
-    <span class="c1"># yaml.indent(sequence=4, offset=2)</span>
+
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
-        <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">fd</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="n">line_length</span><span class="p">:</span>
+            <span class="n">yaml</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">line_length</span>
+            <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">fd</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">WrapperTransformer</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">width</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">fd</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="get_yaml_string"><a class="viewcode-back" href="../../../source/action_updater.utils.html#action_updater.utils.fileio.get_yaml_string">[docs]</a><span class="k">def</span> <span class="nf">get_yaml_string</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
