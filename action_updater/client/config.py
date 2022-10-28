@@ -26,6 +26,9 @@ def main(args, parser, extra, subparser):
     validate = True if not command == "edit" else False
     cli = get_client(quiet=args.quiet, settings_file=args.settings_file, validate=validate)
 
+    # Update config settings on the fly
+    cli.settings.update_params(args.config_params)
+
     # For each new setting, update and save!
     if command == "inituser":
         return cli.settings.inituser()

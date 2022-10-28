@@ -8,5 +8,9 @@ from .helpers import parse_updaters
 
 
 def main(args, parser, extra, subparser):
+
     cli = get_client(quiet=args.quiet)
+
+    # Update config settings on the fly
+    cli.settings.update_params(args.config_params)
     cli.update(paths=args.paths, details=not args.no_details, updaters=parse_updaters(args))

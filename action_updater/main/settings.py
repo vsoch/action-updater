@@ -17,7 +17,6 @@ except ImportError:
 
 import os
 import re
-from datetime import datetime
 
 import jsonschema
 
@@ -295,7 +294,7 @@ class SettingsBase:
         for rep, repvalue in defaults.reps.items():
             if isinstance(value, list):
                 value = [x.replace(rep, repvalue) for x in value]
-            else:
+            elif isinstance(value, str):
                 value = value.replace(rep, repvalue)
 
         return value
@@ -386,6 +385,3 @@ class Settings(SettingsBase):
         self.load(settings_file)
         if validate:
             self.validate()
-
-        # Set an updated time, in case it's written back to file
-        self._settings["updated_at"] = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")

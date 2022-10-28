@@ -18,6 +18,8 @@ try:
 except ImportError:
     from ruamel.yaml import YAML
 
+from .custom_yaml import WrapperTransformer
+
 
 def mkdirp(dirnames):
     """
@@ -132,16 +134,19 @@ def print_json(json_obj):
     return json.dumps(json_obj, indent=4, separators=(",", ": "))
 
 
-def write_yaml(obj, filename):
+def write_yaml(obj, filename, line_length=None):
     """
     Save yaml to file, also preserving comments.
     """
     yaml = YAML()
     yaml.preserve_quotes = True
-    # Could be used to customize spacing, if desired
-    # yaml.indent(sequence=4, offset=2)
+
     with open(filename, "w") as fd:
-        yaml.dump(obj, fd)
+        if line_length:
+            yaml.width = line_length
+            yaml.dump(obj, fd, transform=WrapperTransformer(yaml.width))
+        else:
+            yaml.dump(obj, fd)
 
 
 def get_yaml_string(obj):

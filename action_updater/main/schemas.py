@@ -159,6 +159,7 @@ updaters_schema = {
 settingsProperties = {
     "github_api": {"type": "string"},
     "config_editor": {"type": "string"},
+    "line_length": {"type": ["number", "null"]},
     "updaters": updaters_schema,
     "code_theme": {"type": "string", "choices": list(get_all_styles())},
 }

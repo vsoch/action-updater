@@ -28,11 +28,11 @@ class GitHubAction:
     def jobs(self):
         return self.changes.get("jobs")
 
-    def write(self, path):
+    def write(self, path, line_length=None):
         """
         Save the action to file.
         """
-        utils.write_yaml(self.changes, path)
+        utils.write_yaml(self.changes, path, line_length)
 
     @property
     def has_changes(self):

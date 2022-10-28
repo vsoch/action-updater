@@ -4,6 +4,9 @@
 # config editor
 config_editor: vim
 
+# Line length to save to (unset uses default)
+line_length: 80
+
 # GitHub api
 github_api: https://api.github.com
 
