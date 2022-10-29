@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>action_updater.main.updaters.version.update &mdash; Action Updater 0.0.14 documentation</title>
+  <title>action_updater.main.updaters.version.update &mdash; Action Updater 0.0.15 documentation</title>
       <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../../../_static/sphinx-argparse.css" type="text/css" />
@@ -31,7 +31,7 @@
             <a href="../../../../../index.html" class="icon icon-home"> Action Updater
           </a>
               <div class="version">
-                0.0.14
+                0.0.15
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
@@ -110,65 +110,64 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="c1"># No point if we don&#39;t have jobs!</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">action</span><span class="o">.</span><span class="n">jobs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">action</span><span class="o">.</span><span class="n">steps</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
 
         <span class="c1"># We will use major versions for these orgs (trusted)</span>
         <span class="n">trusted_orgs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;major_orgs&quot;</span><span class="p">)</span>
 
         <span class="c1"># For each job, look for steps-&gt;updater versions</span>
-        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">action</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">job</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;steps&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">action</span><span class="o">.</span><span class="n">steps</span><span class="p">:</span>
 
-                <span class="c1"># We are primarily interested in uses</span>
-                <span class="k">if</span> <span class="s2">&quot;uses&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">step</span><span class="p">:</span>
-                    <span class="k">continue</span>
+            <span class="c1"># We are primarily interested in uses</span>
+            <span class="k">if</span> <span class="s2">&quot;uses&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">step</span><span class="p">:</span>
+                <span class="k">continue</span>
 
-                <span class="n">repo</span> <span class="o">=</span> <span class="n">step</span><span class="p">[</span><span class="s2">&quot;uses&quot;</span><span class="p">]</span>
+            <span class="n">repo</span> <span class="o">=</span> <span class="n">step</span><span class="p">[</span><span class="s2">&quot;uses&quot;</span><span class="p">]</span>
 
-                <span class="c1"># If we have a local action, nothing to update</span>
-                <span class="k">if</span> <span class="n">repo</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;./&quot;</span><span class="p">):</span>
-                    <span class="k">continue</span>
+            <span class="c1"># If we have a local action, nothing to update</span>
+            <span class="k">if</span> <span class="n">repo</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;./&quot;</span><span class="p">):</span>
+                <span class="k">continue</span>
 
-                <span class="c1"># Get the current tag or version (we will want to maintain this convention)</span>
-                <span class="c1"># Create a lookup based on the ref</span>
-                <span class="n">repo</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;@&quot;</span><span class="p">)</span>
-                <span class="n">org</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="c1"># Get the current tag or version (we will want to maintain this convention)</span>
+            <span class="c1"># Create a lookup based on the ref</span>
+            <span class="n">repo</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;@&quot;</span><span class="p">)</span>
+            <span class="n">org</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-                <span class="c1"># Retrieve all tags for the repository, a lookup by tag name</span>
-                <span class="n">tags</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;tags&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tags_lookup</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
+            <span class="c1"># Retrieve all tags for the repository, a lookup by tag name</span>
+            <span class="n">tags</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;tags&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tags_lookup</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
 
-                <span class="n">updated</span> <span class="o">=</span> <span class="kc">None</span>
-                <span class="k">if</span> <span class="n">trusted_orgs</span> <span class="ow">and</span> <span class="n">org</span> <span class="ow">in</span> <span class="n">trusted_orgs</span><span class="p">:</span>
-                    <span class="n">updated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_major_tag</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
+            <span class="n">updated</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">trusted_orgs</span> <span class="ow">and</span> <span class="n">org</span> <span class="ow">in</span> <span class="n">trusted_orgs</span><span class="p">:</span>
+                <span class="n">updated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_major_tag</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
 
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">updated</span><span class="p">:</span>
-                    <span class="n">updated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tagged_commit</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">updated</span><span class="p">:</span>
+                <span class="n">updated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tagged_commit</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
 
-                <span class="c1"># If we don&#39;t have tags by this point, no go - we cannot parse</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">updated</span><span class="p">:</span>
-                    <span class="k">continue</span>
-                <span class="n">updated</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">repo</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">updated</span><span class="si">}</span><span class="s2">&quot;</span>
-                <span class="n">previous</span> <span class="o">=</span> <span class="n">step</span><span class="p">[</span><span class="s2">&quot;uses&quot;</span><span class="p">]</span>
+            <span class="c1"># If we don&#39;t have tags by this point, no go - we cannot parse</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">updated</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">updated</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">repo</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">updated</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">previous</span> <span class="o">=</span> <span class="n">step</span><span class="p">[</span><span class="s2">&quot;uses&quot;</span><span class="p">]</span>
 
-                <span class="c1"># If we added a new comment, update the old one</span>
-                <span class="k">if</span> <span class="s2">&quot;#&quot;</span> <span class="ow">in</span> <span class="n">updated</span><span class="p">:</span>
-                    <span class="n">updated</span><span class="p">,</span> <span class="n">comment</span> <span class="o">=</span> <span class="n">updated</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-                    <span class="n">comment</span> <span class="o">=</span> <span class="n">comment</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-                    <span class="n">step</span><span class="p">[</span><span class="s2">&quot;uses&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">updated</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-
-                    <span class="c1"># TODO some check to preserve other previous comments?</span>
-                    <span class="n">step</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="s2">&quot;uses&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
-
-                    <span class="c1"># Add the end of line comment (third position in list)</span>
-                    <span class="n">step</span><span class="o">.</span><span class="n">yaml_add_eol_comment</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;# </span><span class="si">{</span><span class="n">comment</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;uses&quot;</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-                <span class="c1"># Always do the update (regardless of comment!)</span>
+            <span class="c1"># If we added a new comment, update the old one</span>
+            <span class="k">if</span> <span class="s2">&quot;#&quot;</span> <span class="ow">in</span> <span class="n">updated</span><span class="p">:</span>
+                <span class="n">updated</span><span class="p">,</span> <span class="n">comment</span> <span class="o">=</span> <span class="n">updated</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">comment</span> <span class="o">=</span> <span class="n">comment</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
                 <span class="n">step</span><span class="p">[</span><span class="s2">&quot;uses&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">updated</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
-                <span class="c1"># Do we have a change?</span>
-                <span class="k">if</span> <span class="n">step</span><span class="p">[</span><span class="s2">&quot;uses&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">previous</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="c1"># TODO some check to preserve other previous comments?</span>
+                <span class="n">step</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="s2">&quot;uses&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+                <span class="c1"># Add the end of line comment (third position in list)</span>
+                <span class="n">step</span><span class="o">.</span><span class="n">yaml_add_eol_comment</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;# </span><span class="si">{</span><span class="n">comment</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;uses&quot;</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="c1"># Always do the update (regardless of comment!)</span>
+            <span class="n">step</span><span class="p">[</span><span class="s2">&quot;uses&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">updated</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+            <span class="c1"># Do we have a change?</span>
+            <span class="k">if</span> <span class="n">step</span><span class="p">[</span><span class="s2">&quot;uses&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">previous</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">!=</span> <span class="mi">0</span></div>
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>action_updater.main.updaters.setoutput.update &mdash; Action Updater 0.0.14 documentation</title>
+  <title>action_updater.main.updaters.setoutput.update &mdash; Action Updater 0.0.15 documentation</title>
       <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../../../_static/sphinx-argparse.css" type="text/css" />
@@ -31,7 +31,7 @@
             <a href="../../../../../index.html" class="icon icon-home"> Action Updater
           </a>
               <div class="version">
-                0.0.14
+                0.0.15
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
@@ -129,25 +129,24 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="c1"># No point if we don&#39;t have jobs!</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">action</span><span class="o">.</span><span class="n">jobs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">action</span><span class="o">.</span><span class="n">steps</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
 
         <span class="c1"># For each job, look for steps-&gt;updater versions</span>
-        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">action</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">job</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;steps&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">action</span><span class="o">.</span><span class="n">steps</span><span class="p">:</span>
 
-                <span class="c1"># We are primarily interested in uses</span>
-                <span class="k">if</span> <span class="s2">&quot;run&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">step</span><span class="p">:</span>
-                    <span class="k">continue</span>
+            <span class="c1"># We are primarily interested in uses</span>
+            <span class="k">if</span> <span class="s2">&quot;run&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">step</span><span class="p">:</span>
+                <span class="k">continue</span>
 
-                <span class="c1"># Update step run lines (returns parsed again together)</span>
-                <span class="n">updated_lines</span> <span class="o">=</span> <span class="n">update_lines</span><span class="p">(</span><span class="n">step</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">])</span>
+            <span class="c1"># Update step run lines (returns parsed again together)</span>
+            <span class="n">updated_lines</span> <span class="o">=</span> <span class="n">update_lines</span><span class="p">(</span><span class="n">step</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">])</span>
 
-                <span class="c1"># Keep track of change counts</span>
-                <span class="k">if</span> <span class="n">updated_lines</span> <span class="o">!=</span> <span class="n">step</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">]:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="c1"># Keep track of change counts</span>
+            <span class="k">if</span> <span class="n">updated_lines</span> <span class="o">!=</span> <span class="n">step</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-                <span class="n">step</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">updated_lines</span>
+            <span class="n">step</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">updated_lines</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">!=</span> <span class="mi">0</span></div></div>
 </pre></div>
