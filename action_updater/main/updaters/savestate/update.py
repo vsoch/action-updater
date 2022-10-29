@@ -19,24 +19,23 @@ class SavestateUpdater(UpdaterBase):
         self.count = 0
 
         # No point if we don't have jobs!
-        if not action.jobs:
+        if not action.steps:
             return False
 
         # For each job, look for steps->updater versions
-        for _, job in action.jobs.items():
-            for step in job.get("steps", []):
+        for step in action.steps:
 
-                # We are primarily interested in uses
-                if "run" not in step:
-                    continue
+            # We are primarily interested in uses
+            if "run" not in step:
+                continue
 
-                # Update step run lines
-                updated_lines = update_lines(step["run"], "save-state", "$GITHUB_STATE")
+            # Update step run lines
+            updated_lines = update_lines(step["run"], "save-state", "$GITHUB_STATE")
 
-                # Keep track of change counts
-                if updated_lines != step["run"]:
-                    self.count += 1
+            # Keep track of change counts
+            if updated_lines != step["run"]:
+                self.count += 1
 
-                step["run"] = updated_lines
+            step["run"] = updated_lines
 
         return self.count != 0
