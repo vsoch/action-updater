@@ -28,6 +28,21 @@ class GitHubAction:
     def jobs(self):
         return self.changes.get("jobs")
 
+    @property
+    def runs(self):
+        return self.changes.get("runs")
+
+    @property
+    def steps(self):
+        if self.jobs:
+            for _, job in self.jobs.items():
+                for step in job.get("steps", []):
+                    yield step
+
+        elif self.runs:
+            for step in self.runs.get("steps", []):
+                yield step
+
     def write(self, path, line_length=None):
         """
         Save the action to file.

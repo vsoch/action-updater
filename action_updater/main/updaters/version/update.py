@@ -30,65 +30,64 @@ class VersionUpdater(UpdaterBase):
         self.count = 0
 
         # No point if we don't have jobs!
-        if not action.jobs:
+        if not action.steps:
             return False
 
         # We will use major versions for these orgs (trusted)
         trusted_orgs = self.settings.get("major_orgs")
 
         # For each job, look for steps->updater versions
-        for _, job in action.jobs.items():
-            for step in job.get("steps", []):
+        for step in action.steps:
 
-                # We are primarily interested in uses
-                if "uses" not in step:
-                    continue
+            # We are primarily interested in uses
+            if "uses" not in step:
+                continue
 
-                repo = step["uses"]
+            repo = step["uses"]
 
-                # If we have a local action, nothing to update
-                if repo.startswith("./"):
-                    continue
+            # If we have a local action, nothing to update
+            if repo.startswith("./"):
+                continue
 
-                # Get the current tag or version (we will want to maintain this convention)
-                # Create a lookup based on the ref
-                repo, _ = repo.split("@")
-                org, _ = repo.split("/", 1)
+            # Get the current tag or version (we will want to maintain this convention)
+            # Create a lookup based on the ref
+            repo, _ = repo.split("@")
+            org, _ = repo.split("/", 1)
 
-                # Retrieve all tags for the repository, a lookup by tag name
-                tags = self.cache["tags"].get(repo) or self.get_tags_lookup(repo)
+            # Retrieve all tags for the repository, a lookup by tag name
+            tags = self.cache["tags"].get(repo) or self.get_tags_lookup(repo)
 
-                updated = None
-                if trusted_orgs and org in trusted_orgs:
-                    updated = self.get_major_tag(tags)
+            updated = None
+            if trusted_orgs and org in trusted_orgs:
+                updated = self.get_major_tag(tags)
 
-                if not updated:
-                    updated = self.get_tagged_commit(tags)
+            if not updated:
+                updated = self.get_tagged_commit(tags)
 
-                # If we don't have tags by this point, no go - we cannot parse
-                if not updated:
-                    continue
-                updated = f"{repo}@{updated}"
-                previous = step["uses"]
+            # If we don't have tags by this point, no go - we cannot parse
+            if not updated:
+                continue
+            updated = f"{repo}@{updated}"
+            previous = step["uses"]
 
-                # If we added a new comment, update the old one
-                if "#" in updated:
-                    updated, comment = updated.split("#", 1)
-                    comment = comment.strip()
-                    step["uses"] = updated.strip()
-
-                    # TODO some check to preserve other previous comments?
-                    step.ca.items["uses"] = [None, None, None, None]
-
-                    # Add the end of line comment (third position in list)
-                    step.yaml_add_eol_comment(f"# {comment}\n", "uses", column=0)
-
-                # Always do the update (regardless of comment!)
+            # If we added a new comment, update the old one
+            if "#" in updated:
+                updated, comment = updated.split("#", 1)
+                comment = comment.strip()
                 step["uses"] = updated.strip()
 
-                # Do we have a change?
-                if step["uses"] != previous:
-                    self.count += 1
+                # TODO some check to preserve other previous comments?
+                step.ca.items["uses"] = [None, None, None, None]
+
+                # Add the end of line comment (third position in list)
+                step.yaml_add_eol_comment(f"# {comment}\n", "uses", column=0)
+
+            # Always do the update (regardless of comment!)
+            step["uses"] = updated.strip()
+
+            # Do we have a change?
+            if step["uses"] != previous:
+                self.count += 1
 
         return self.count != 0
 

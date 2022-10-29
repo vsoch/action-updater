@@ -8,6 +8,54 @@ from pygments.styles import get_all_styles
 
 schema_url = "http://json-schema.org/draft-07/schema"
 
+steps = {
+    "description": "A job contains a sequence of tasks called steps. Steps can run commands, run setup tasks, or run an action in your repository, a public repository, or an action published in a Docker registry. Not all steps run actions, but all actions are run as a step. Each step runs in its own process in the virtual environment and has access to the workspace and filesystem. Because steps are run in their own process, changes to environment variables are not preserved between steps. GitHub provides built-in steps to set up and complete a job.",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "name": {
+                "description": "A name for your step to display on GitHub.",
+                "type": "string",
+            },
+            "uses": {
+                "description": "Selects an action to run as part of a step in your job. An action is a reusable unit of code. You can use an action defined in the same repository as the workflow, a public repository, or in a published Docker container image.",
+                "type": "string",
+            },
+            "with": {
+                "type": "object",
+                "description": "A map of the input parameters defined by the action. Each input parameter is a key/value pair. Input parameters are set as environment variables. The variable is prefixed with INPUT_ and converted to upper case.",
+                "addtionalProperties": {"type": "string"},
+            },
+            "env": {
+                "type": "object",
+                "description": "Sets environment variables for steps to use in the virtual environment. Public actions may specify expected environment variables in the README file. If you are setting a secret in an environment variable, you must set secrets using the secrets context.",
+                "addtionalProperties": {"type": "string"},
+            },
+            "if": {
+                "description": "Identifies any steps that must complete successfully before this step will run. It can be a string or an array of strings. If a step fails, all steps that need it will also fail unless the steps use a conditional statement that causes the step to continue.",
+                "type": "string",
+            },
+            "run": {
+                "description": "Runs command line programs using the operating system's shell. If you do not provide a name, the step name will default to the run command. Commands run using non-login shells by default.",
+                "type": "string",
+            },
+            "working-directory": {
+                "description": "The default directory that the action uses in a job's workspace.",
+                "type": "string",
+            },
+            "continue-on-error": {
+                "description": "Prevents a job from failing when a step fails. Set to true to allow a job to pass when this step fails.",
+                "type": "boolean",
+            },
+            "timeout-minutes": {
+                "description": "The maximum number of minutes to let a workflow run before GitHub automatically cancels it.",
+                "type": "number",
+            },
+        },
+    },
+}
+
 workflow_schema = {
     "title": "Github workflow file - https://help.github.com/en/articles/workflow-syntax-for-github-actions",
     "$schema": schema_url,
@@ -77,62 +125,18 @@ workflow_schema = {
                         "default": "ubuntu-latest",
                         "enum": [
                             "ubuntu-latest",
+                            "ubuntu-22.04",
+                            "ubuntu-20.04",
                             "ubuntu-18.04",
-                            "ubuntu-16.04",
                             "windows-latest",
                             "windows-2019",
-                            "windows-2016",
-                            "macOS-latest",
-                            "macOS-10.14",
+                            "windows-2022",
+                            "macos-latest",
+                            "macos-12",
+                            "macos-11",
                         ],
                     },
-                    "steps": {
-                        "description": "A job contains a sequence of tasks called steps. Steps can run commands, run setup tasks, or run an action in your repository, a public repository, or an action published in a Docker registry. Not all steps run actions, but all actions are run as a step. Each step runs in its own process in the virtual environment and has access to the workspace and filesystem. Because steps are run in their own process, changes to environment variables are not preserved between steps. GitHub provides built-in steps to set up and complete a job.",
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "description": "A name for your step to display on GitHub.",
-                                    "type": "string",
-                                },
-                                "uses": {
-                                    "description": "Selects an action to run as part of a step in your job. An action is a reusable unit of code. You can use an action defined in the same repository as the workflow, a public repository, or in a published Docker container image.",
-                                    "type": "string",
-                                },
-                                "with": {
-                                    "type": "object",
-                                    "description": "A map of the input parameters defined by the action. Each input parameter is a key/value pair. Input parameters are set as environment variables. The variable is prefixed with INPUT_ and converted to upper case.",
-                                    "addtionalProperties": {"type": "string"},
-                                },
-                                "env": {
-                                    "type": "object",
-                                    "description": "Sets environment variables for steps to use in the virtual environment. Public actions may specify expected environment variables in the README file. If you are setting a secret in an environment variable, you must set secrets using the secrets context.",
-                                    "addtionalProperties": {"type": "string"},
-                                },
-                                "if": {
-                                    "description": "Identifies any steps that must complete successfully before this step will run. It can be a string or an array of strings. If a step fails, all steps that need it will also fail unless the steps use a conditional statement that causes the step to continue.",
-                                    "type": "string",
-                                },
-                                "run": {
-                                    "description": "Runs command line programs using the operating system's shell. If you do not provide a name, the step name will default to the run command. Commands run using non-login shells by default.",
-                                    "type": "string",
-                                },
-                                "working-directory": {
-                                    "description": "The default directory that the action uses in a job's workspace.",
-                                    "type": "string",
-                                },
-                                "continue-on-error": {
-                                    "description": "Prevents a job from failing when a step fails. Set to true to allow a job to pass when this step fails.",
-                                    "type": "boolean",
-                                },
-                                "timeout-minutes": {
-                                    "description": "The maximum number of minutes to let a workflow run before GitHub automatically cancels it.",
-                                    "type": "number",
-                                },
-                            },
-                        },
-                    },
+                    "steps": steps,
                 },
             },
         },
@@ -162,6 +166,29 @@ settingsProperties = {
     "line_length": {"type": ["number", "null"]},
     "updaters": updaters_schema,
     "code_theme": {"type": "string", "choices": list(get_all_styles())},
+}
+
+action = {
+    "$schema": schema_url,
+    "title": "action.yml Schema",
+    "type": "object",
+    "required": [
+        "name",
+        "description",
+        "runs",
+    ],
+    "properties": {
+        "name": {"type": "string"},
+        "description": {"type": "string"},
+        "runs": {
+            "type": "object",
+            "properties": {
+                "using": {"type": "string"},
+                "steps": steps,
+            },
+        },
+    },
+    "additionalProperties": True,
 }
 
 settings = {
