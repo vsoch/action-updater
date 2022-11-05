@@ -12,7 +12,7 @@ The Action Updater can be installed from pypi, or from source.
 Pypi
 ====
 
-The module is available in pypi as `action-updater <https://pypi.org/project/singularity-hpc/>`_,
+The module is available in pypi as `action-updater <https://pypi.org/project/action-updater/>`_,
 and to install we first recommend some kind of virtual environment:
 
 .. code-block:: console
