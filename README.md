@@ -21,6 +21,22 @@ You can see the [⭐️ Documentation ⭐️](https://vsoch.github.io/action-upd
 
 ## ⭐️ Quick Start ⭐️
 
+### Installation 
+
+The module is available in pypi as [action-updater](https://pypi.org/project/action-updater/),
+and to install we first recommend some kind of virtual environment:
+
+```bash
+$ python -m venv env
+$ source env/bin/activate
+```
+
+And then install from pypi using pip:
+
+```bash
+$ pip install action-updater
+```
+
 ### Usage
 
 For all commands below, the actions updater can accept a directory with yaml files,
