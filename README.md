@@ -21,7 +21,7 @@ You can see the [⭐️ Documentation ⭐️](https://vsoch.github.io/action-upd
 
 ## ⭐️ Quick Start ⭐️
 
-### Installation 
+### Installation
 
 The module is available in pypi as [action-updater](https://pypi.org/project/action-updater/),
 and to install we first recommend some kind of virtual environment:
