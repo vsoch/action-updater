@@ -64,6 +64,9 @@ class VersionUpdater(UpdaterBase):
             if not updated:
                 updated = self.get_tagged_commit(tags)
 
+            # Save repo tags in cache
+            self.cache["tags"][repo] = tags
+
             # If we don't have tags by this point, no go - we cannot parse
             if not updated:
                 continue

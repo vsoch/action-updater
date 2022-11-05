@@ -14,6 +14,7 @@ and **Merged pull requests**. Critical items to know are:
 The versions coincide with releases on pip. Only major versions will be released as tags on Github.
 
 ## [0.0.x](https://github.com/rse-ops/actions-updater/tree/main) (0.0.x)
+ - missing cache added back (0.0.16)
  - add support for updating action.yml (with composite action) (0.0.15)
  - add line_length parameter to settings (0.0.14)
  - enforce fallback to use major versions still enforces commit (0.0.13)
