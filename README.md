@@ -23,10 +23,18 @@ You can see the [⭐️ Documentation ⭐️](https://vsoch.github.io/action-upd
 
 ### Installation 
 
-Install with pip:
+The module is available in pypi as [action-updater](https://pypi.org/project/action-updater/),
+and to install we first recommend some kind of virtual environment:
 
 ```bash
-$ pip install action-lint
+$ python -m venv env
+$ source env/bin/activate
+```
+
+And then install from pypi using pip:
+
+```bash
+$ pip install action-updater
 ```
 
 ### Usage
