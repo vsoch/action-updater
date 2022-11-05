@@ -20,6 +20,17 @@
             "avatar_url": [
                 "https://avatars.githubusercontent.com/u/814322?v=4"
             ]
+        },
+        {
+            "login": "mikemhenry",
+            "name": "Mike Henry",
+            "contributions": [
+                "code"
+            ],
+            "profile": "https://www.henrymike.com/",
+            "avatar_url": [
+                "https://avatars.githubusercontent.com/u/11765982?v=4"
+            ]
         }
     ],
     "contributorsPerLine": 7
