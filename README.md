@@ -21,6 +21,14 @@ You can see the [⭐️ Documentation ⭐️](https://vsoch.github.io/action-upd
 
 ## ⭐️ Quick Start ⭐️
 
+### Installation 
+
+Install with pip:
+
+```bash
+$ pip install action-lint
+```
+
 ### Usage
 
 For all commands below, the actions updater can accept a directory with yaml files,
